@@ -17,8 +17,6 @@ package LeTanGUI;
 //import GUI.DuyetGUI.SuaHDGUI;
 //import GUI.DuyetGUI.ThemHDGUI;
 //import Report.ReportPDF;
-import com.github.lgooddatepicker.components.DatePicker;
-import com.github.lgooddatepicker.components.DatePickerSettings;
 import java.io.IOException;
 import java.awt.Color;
 import java.awt.Cursor;
