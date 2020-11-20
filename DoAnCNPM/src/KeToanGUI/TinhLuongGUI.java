@@ -57,7 +57,7 @@ public class TinhLuongGUI extends JPanel {
     Border border = BorderFactory.createLineBorder(new Color(33, 33, 33));
     Border bordernull = BorderFactory.createEmptyBorder();
     Border borderinput = BorderFactory.createLineBorder(new Color(30, 210, 96), 4);
-
+     
     
 
     public TinhLuongGUI() {
