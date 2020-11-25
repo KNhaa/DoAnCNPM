@@ -52,6 +52,7 @@ public class LeTanFrame extends JFrame {
     Image bg;
     Font font= new Font("Segoe UI", Font.BOLD, 20);
     Font font1 = new Font("Segoe UI", Font.BOLD, 25);
+    
     public LeTanFrame() {
         ImageIcon img = new ImageIcon("src/HinhAnh/employee.png");
         this.setIconImage(img.getImage());
@@ -336,7 +337,7 @@ public class LeTanFrame extends JFrame {
 //                pncontent.repaint();
 //                spGUI.revalidate();
 //                spGUI.repaint();
-                DatPhongGUI datphongGUI = new DatPhongGUI();
+                DatPhongGUI datphongGUI = new DatPhongGUI("LT1");
                 pncontent.removeAll();                
                 pncontent.add(datphongGUI);               
                 pncontent.setBounds(250, 0, 950, 700);

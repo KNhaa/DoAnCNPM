@@ -5,18 +5,11 @@
  */
 package LeTanGUI;
 
-/**
- *
- * @author DELL
- */
-//import BUS.CTHDBUS;
-//import BUS.HoaDonBUS;
-//import DTO.CTHDDTO;
-//import DTO.HoaDonDTO;
-//import SupportGUI.SupportHoaDon;
-//import GUI.DuyetGUI.SuaHDGUI;
-//import GUI.DuyetGUI.ThemHDGUI;
-//import Report.ReportPDF;
+import BUS.CTDatPhongBUS;
+import BUS.PDatPhongBUS;
+import DTO.CTDatPhongDTO;
+import DTO.PDatPhongDTO;
+import SupportGUI.PhieuDatPhongGUI;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import java.io.IOException;
@@ -66,7 +59,7 @@ public class DatPhongGUI extends JPanel {
     JLabel lbhd, lbcthd, lbtop, lbexit, lbinfopbh;
     JComboBox cb;
     JPanel hd, cthd;
-    Font font = new Font("Segoe UI", Font.BOLD, 18);
+    Font font = new Font("Segoe UI", Font.BOLD, 18);  
     Border border = BorderFactory.createLineBorder(new Color(33, 33, 33));
     //Border border = BorderFactory.createLineBorder(Color.RED);
     Border bordernull = BorderFactory.createEmptyBorder();
@@ -79,7 +72,7 @@ public class DatPhongGUI extends JPanel {
     Border borderinput = BorderFactory.createLineBorder(new Color(30, 210, 96), 4);
     //Border borderinput = BorderFactory.createLineBorder(Color.red);
 
-    public DatPhongGUI() {
+    public DatPhongGUI(String id) {
 
         this.setSize(1350, 945);
         this.setLayout(null);
@@ -93,10 +86,6 @@ public class DatPhongGUI extends JPanel {
         ImageIcon hinhback = new ImageIcon(getClass().getResource("/HinhAnh/back.png"));
         ImageIcon hinhbackf = new ImageIcon(getClass().getResource("/HinhAnh/backf.png"));
 
-//        lbtop = new JLabel();
-//        lbtop.setBounds(0, 0, 1350, 65);
-//        lbtop.setBackground(new Color(18, 18, 18));
-//        lbtop.setOpaque(true);
         lbtop = new JLabel();
         lbtop.setBounds(0, 0, 950, 65);
         lbtop.setBackground(new Color(134, 174, 195));
@@ -409,7 +398,6 @@ public class DatPhongGUI extends JPanel {
         tknc.setFocusTraversalKeysEnabled(false);
         tknc.setBackground(new Color(33, 33, 33));
         tknc.addMouseListener(new MouseListener() {
-            // SẢN PHẨM GUI
             @Override
             public void mouseClicked(MouseEvent e) {
                 lbtknc.setVisible(true);
@@ -481,8 +469,8 @@ public class DatPhongGUI extends JPanel {
         txtimkiem.setFont(font);
         txtimkiem.setBounds(70, 18, 250, 32);
         txtimkiem.setBorder(border);
-       // String choose[] = {"Theo Mã HĐ", "Theo Mã KH", "Theo Mã NV", "Theo Mã KM", "Theo Ngày", "Theo SL Tổng", "Theo T.Tiền", "Theo Th.Tiền"};
-       String choose[] = {"Theo Mã HĐ","Theo Mã KM", "Theo Mã NV", "Theo Mã KH"};
+ 
+        String choose[] = {"Theo Mã đặt", "Theo Mã KH", "Theo Mã NV", "Theo Ngày đặt", "Ngày đến", "Ngày đi", "ID luu trú", "Tên lưu trú"};
         cb = new JComboBox(choose);
         cb.setBounds(340, 18, 130, 32);
         cb.setFont(new Font("Segoe UI", Font.BOLD, 16));
@@ -502,7 +490,6 @@ public class DatPhongGUI extends JPanel {
         exit.setFocusPainted(false);
         exit.setHorizontalTextPosition(SwingConstants.LEFT);
         exit.addMouseListener(new MouseListener() {
-            // SẢN PHẨM GUI
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.exit(0);
@@ -541,10 +528,10 @@ public class DatPhongGUI extends JPanel {
         hd = new JPanel();
         hd.setLayout(null);
        // hd.setBounds(100, 100, 1020, 360);
-        hd.setBounds(30, 100, 900, 360);
+        hd.setBounds(30, 100, 910, 360);
         hd.setBackground(new Color(237,241,255));
        //hd.setBackground(Color.RED);
-        TitledBorder TTborder1 = new TitledBorder("Hóa Đơn");
+        TitledBorder TTborder1 = new TitledBorder("Phiếu Đặt Phòng");
         TTborder1.setTitleJustification(TitledBorder.LEFT);
         TTborder1.setTitlePosition(TitledBorder.TOP);
         TTborder1.setTitleColor(new Color(33,33,33));
@@ -552,15 +539,18 @@ public class DatPhongGUI extends JPanel {
         TTborder1.setTitleFont(font);
         hd.setBorder(TTborder1);
 
-        Vector header = new Vector();
-        header.add("Mã HĐ");
-        header.add("Mã KM");
-        header.add("Mã NV");
+        Vector header = new Vector();        
+        header.add("Mã Đặt");
         header.add("Mã KH");
+        header.add("Mã NV");
         header.add("Ngày Lập");
-        header.add("Tổng tiền");
-        header.add("Tiền KM");
-        header.add("Thực trả");
+        header.add("Ngày đến");
+        header.add("Ngày đi");
+        header.add("ID lưu trú");
+        header.add("Tên lưu trú");
+        header.add("Tiền phòng");
+        header.add("Tiền cọc");
+        header.add("Trạng thái");
 
 
         modelHD = new DefaultTableModel(header, 0);
@@ -573,66 +563,59 @@ public class DatPhongGUI extends JPanel {
         
         tableHD.setBackground(new Color(255, 255, 255));
         tableHD.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        tableHD.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tableHD.getColumnModel().getColumn(1).setPreferredWidth(40);
-        tableHD.getColumnModel().getColumn(2).setPreferredWidth(40);
-        tableHD.getColumnModel().getColumn(3).setPreferredWidth(50);
-        tableHD.getColumnModel().getColumn(4).setPreferredWidth(60);
-        tableHD.getColumnModel().getColumn(5).setPreferredWidth(20);
-        tableHD.getColumnModel().getColumn(6).setPreferredWidth(20);
-        tableHD.getColumnModel().getColumn(7).setPreferredWidth(10);
 
         tableHD.getTableHeader().setForeground(new Color(255, 255, 255));
-        tableHD.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 20));
+        tableHD.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tableHD.getTableHeader().setBackground(new Color(31,73,91));
         tableHD.getTableHeader().setBorder(border);
         tableHD.setRowHeight(30);
 
         JScrollPane bangHD = new JScrollPane(tableHD);
-        //bangHD.setBounds(10, 30, 1000, 320);
-        bangHD.setBounds(10, 30, 880, 320);
+        bangHD.setBounds(10, 30, 890, 320);
         hd.add(bangHD);
+        
+        //Đọc danh sách phiếu đặt phòng
+        PDatPhongBUS pdphongbus = new PDatPhongBUS();
+        pdphongbus.docDSPDPhong();
+        if (PDatPhongBUS.dspdphong == null) {
+            pdphongbus.docDSPDPhong();
+        }
+        for (PDatPhongDTO pdatphong : PDatPhongBUS.dspdphong) {
+            Vector row = new Vector();
 
-        //Đọc DSHD
-//        HoaDonBUS bushd = new HoaDonBUS();
-//        if (HoaDonBUS.dshd == null) {
-//            bushd.docDSHD();
-//        }
-//        for (HoaDonDTO hd : HoaDonBUS.dshd) {
-//            Vector row = new Vector();
-//            row.add(hd.getMahd());
-//             row.add(hd.getMakm());
-//            row.add(hd.getManv());
-//            row.add(hd.getMakh());
-//            row.add(hd.getNgaylaphd());
-//            row.add(hd.getTongtien());
-//            row.add(hd.getTienkm());
-//            row.add(hd.getThuctra());
-//           
-//            modelHD.addRow(row);
-//        }
+            row.add(pdatphong.getMadat());
+            row.add(pdatphong.getMakhdat());
+            row.add(pdatphong.getManv());
+            row.add(pdatphong.getNgaydatphong());
+            row.add(pdatphong.getNgayden());
+            row.add(pdatphong.getNgaydi());
+            row.add(pdatphong.getCmndnguoiluutru());
+            row.add(pdatphong.getTennguoiluutru());
+            row.add(pdatphong.getTienphong());
+            row.add(pdatphong.getTiencoc());
+            row.add(pdatphong.getTrangthai());
+                      
+            modelHD.addRow(row);
+        }
 
         //Chi tiết HĐ    
         cthd = new JPanel();
         cthd.setLayout(null);
         cthd.setBounds(30, 470, 620, 200);
-       cthd.setBackground(new Color(237,241,255));
+        cthd.setBackground(new Color(237,241,255));
        
-        TitledBorder TTborder2 = new TitledBorder("Chi Tiết Hóa Đơn");
+        TitledBorder TTborder2 = new TitledBorder("Chi Tiết Đặt Phòng");
         TTborder2.setTitleJustification(TitledBorder.LEFT);
         TTborder2.setTitlePosition(TitledBorder.TOP);
         TTborder2.setTitleColor(new Color(33,33,33));
         TTborder2.setTitleFont(font);
         cthd.setBorder(TTborder2);
         
-        header = new Vector();
-        header.add("Mã HĐ");
-        header.add("Mã SP");
-        header.add("Số Lượng");
-        header.add("Thành tiền");
-        header.add("Tiền KM");
-        
-
+        header = new Vector();        
+        header.add("Mã Đặt");
+        header.add("Mã phòng");
+        header.add("Đơn giá");
+ 
         modelCTHD = new DefaultTableModel(header, 0);
         tableCTHD = new JTable();
         tableCTHD.setModel(modelCTHD);
@@ -640,7 +623,7 @@ public class DatPhongGUI extends JPanel {
         tableCTHD.setBorder(border);
         tableCTHD.setFillsViewportHeight(true);
         tableCTHD.setBackground(new Color(255, 255, 255));
-        tableCTHD.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        tableCTHD.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         tableCTHD.getTableHeader().setForeground(new Color(255, 255, 255));
         tableCTHD.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 20));
         tableCTHD.getTableHeader().setBackground(new Color(31,73,91));
@@ -665,20 +648,19 @@ public class DatPhongGUI extends JPanel {
                     inan.setEnabled(true);
                     String ma = tableHD.getValueAt(i, 0).toString();    //Lấy mã hd
                     clickxoa = 0; // Xóa HĐ
-//                    CTHDBUS busct = new CTHDBUS();
-//                    busct.docCTHDtheoHD(ma);
-//                    for (CTHDDTO cthd : CTHDBUS.dscthd) // Với mỗi CTHD nằm trong dscthd của BUS
-//                    {
-//                        Vector row = new Vector();
-//                        row.add(cthd.getMahd());
-//                        row.add(cthd.getMasach());
-//                        row.add(cthd.getSoluong());
-//                        row.add(cthd.getThanhtien());
-//                        row.add(cthd.getTienkm());
-//                        //row.add(Chuyentien(String.valueOf(cthd.getDongia())));
-//                        modelCTHD.addRow(row);
-//                    }
-//                    tableCTHD.setModel(modelCTHD);
+
+                    
+                    CTDatPhongBUS ctdatphong = new CTDatPhongBUS();
+                    ctdatphong.docCTDPtheoMa(ma);
+                    for (CTDatPhongDTO ctdp : CTDatPhongBUS.dsctdatphong) // Với mỗi CTDP nằm trong dsctdp của BUS
+                    {
+                        Vector row = new Vector();
+                        row.add(ctdp.getMadat());
+                        row.add(ctdp.getMaphong());
+                        row.add(ctdp.getDongia());
+                        modelCTHD.addRow(row);
+                    }
+                    tableCTHD.setModel(modelCTHD);
                 }
 
             }
@@ -732,6 +714,8 @@ public class DatPhongGUI extends JPanel {
             public void mouseClicked(MouseEvent e) {
 //                ThemHDGUI test = new ThemHDGUI();
 //                test.setView("Manager");
+                PhieuDatPhongGUI pdat = new PhieuDatPhongGUI();
+                pdat.setView(id);
             }
 
             @Override
@@ -1195,5 +1179,18 @@ public class DatPhongGUI extends JPanel {
 //        f.setVisible(true);
 //
 //    }
+    
+    // TEST THỬ
+    public static void main(String args[])
+    {
+        DatPhongGUI dp = new DatPhongGUI("LT1");
+        JFrame f = new JFrame();
+        f.setSize(1355, 950);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.add(dp);
+        f.setVisible(true);
+    }
 }
+
+
 
