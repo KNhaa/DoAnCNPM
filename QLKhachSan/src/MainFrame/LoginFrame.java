@@ -334,6 +334,7 @@ public class LoginFrame extends JFrame {
         this.setVisible(true);
     }
 
+
     public static void main(String[] args) {
         //UIManager.setLookAndFeel( "com.seaglasslookandfeel.SeaGlassLookAndFeel" );
         LoginFrame test = new LoginFrame();

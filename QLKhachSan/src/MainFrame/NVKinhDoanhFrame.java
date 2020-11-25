@@ -573,7 +573,7 @@ public class NVKinhDoanhFrame extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
-                TKLoaiPhongGUI tkloaiphongGUI = new TKLoaiPhongGUI();
+                TKLoaiPhongGUI tkloaiphongGUI = new TKLoaiPhongGUI();    
                 pncontent.removeAll();
                 pncontent.add(tkloaiphongGUI);
                 pncontent.setBounds(250, 0, 1350, 945);
@@ -659,15 +659,7 @@ public class NVKinhDoanhFrame extends JFrame {
                 tkdichvuGUI.revalidate();
                 tkdichvuGUI.repaint();
                 
-                
-                
-
-//                hinhpnh.setIcon(imgpnhf);
-//                hinhsp.setIcon(imgsp);
-//                hinhkh.setIcon(imgkh);
-//                hinhhd.setIcon(imghoadon);
-//                hinhbh.setIcon(imgbaohanh);
-//                hinhhome.setIcon(imghome);
+               
 
                 c6.setBackground(color_part);
                 c9.setBackground(color_background);
@@ -1095,17 +1087,7 @@ public class NVKinhDoanhFrame extends JFrame {
     }
     
     public static void main(String[] args) {
-//        try {
-//            UIManager.setLookAndFeel( "com.seaglasslookandfeel.SeaGlassLookAndFeel" );
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(GiaoDienManager.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            Logger.getLogger(GiaoDienManager.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            Logger.getLogger(GiaoDienManager.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (UnsupportedLookAndFeelException ex) {
-//            Logger.getLogger(GiaoDienManager.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
         NVKinhDoanhFrame test = new NVKinhDoanhFrame();
             test.ShowBang();
     }
