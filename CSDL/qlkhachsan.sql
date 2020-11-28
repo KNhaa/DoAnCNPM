@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 13, 2020 lúc 11:12 AM
--- Phiên bản máy phục vụ: 10.4.6-MariaDB
--- Phiên bản PHP: 7.3.9
+-- Thời gian đã tạo: Th10 28, 2020 lúc 08:41 AM
+-- Phiên bản máy phục vụ: 10.4.11-MariaDB
+-- Phiên bản PHP: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -30,7 +29,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `calam` (
   `maca` char(15) NOT NULL,
-  `tiencong` int(11) NOT NULL,
   `giobatdau` time NOT NULL,
   `gioketthuc` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -39,14 +37,14 @@ CREATE TABLE `calam` (
 -- Đang đổ dữ liệu cho bảng `calam`
 --
 
-INSERT INTO `calam` (`maca`, `tiencong`, `giobatdau`, `gioketthuc`) VALUES
-('BT1C', 40000, '13:00:00', '17:00:00'),
-('BT1S', 40000, '07:30:00', '11:30:00'),
-('HC1C', 40000, '13:00:00', '17:00:00'),
-('HC1S', 40000, '07:30:00', '11:30:00'),
-('PV1', 40000, '06:00:00', '14:00:00'),
-('PV2', 40000, '00:00:00', '22:00:00'),
-('PV3', 40000, '22:00:00', '06:00:00');
+INSERT INTO `calam` (`maca`, `giobatdau`, `gioketthuc`) VALUES
+('BT1C', '13:00:00', '17:00:00'),
+('BT1S', '07:30:00', '11:30:00'),
+('HC1C', '13:00:00', '17:00:00'),
+('HC1S', '07:30:00', '11:30:00'),
+('PV1', '06:00:00', '14:00:00'),
+('PV2', '00:00:00', '22:00:00'),
+('PV3', '22:00:00', '06:00:00');
 
 -- --------------------------------------------------------
 
@@ -65,15 +63,12 @@ CREATE TABLE `chucvu` (
 --
 
 INSERT INTO `chucvu` (`macv`, `tenchucvu`, `luong`) VALUES
-('BP', 'Nhân viên phòng bếp', 10000000),
-('BV', 'Nhân viên bảo vệ', 8000000),
 ('GX', 'Nhân viên giữ xe', 6000000),
 ('KD', 'Nhân viên kinh doanh', 15000000),
 ('KT', 'Kế toán', 12000000),
 ('LT', 'Lễ tân', 10000000),
 ('QL', 'Quản lý', 20000000),
-('TK', 'Thủ kho', 10000000),
-('TV', 'Nhân viên tạp vụ', 8000000);
+('TK', 'Thủ kho', 10000000);
 
 -- --------------------------------------------------------
 
@@ -84,34 +79,9 @@ INSERT INTO `chucvu` (`macv`, `tenchucvu`, `luong`) VALUES
 CREATE TABLE `ctdat` (
   `madat` char(15) NOT NULL,
   `maphong` char(10) NOT NULL,
+  `maphieudvu` char(15) NOT NULL,
   `dongia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Đang đổ dữ liệu cho bảng `ctdat`
---
-
-INSERT INTO `ctdat` (`madat`, `maphong`, `dongia`) VALUES
-('PD1', '101', 1000000),
-('PD1', '102', 1000000),
-('PD2', '110', 1500000),
-('PD2', '111', 1500000),
-('PD2', '113', 1500000),
-('PD3', '103', 1000000),
-('PD3', '104', 1000000),
-('PD4', '202', 2000000),
-('PD4', '203', 2000000),
-('PD5', '206', 2500000),
-('PD5', '207', 250000),
-('PD6', '102', 1000000),
-('PD6', '103', 1000000),
-('PD7', '101', 1000000),
-('PD7', '102', 1000000),
-('PD7', '103', 1000000),
-('PD8', '104', 1000000),
-('PD8', '105', 1000000),
-('PD9', '206', 2500000),
-('PD9', '207', 2500000);
 
 -- --------------------------------------------------------
 
@@ -142,21 +112,6 @@ CREATE TABLE `ctdvu` (
   `thanhtien` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Đang đổ dữ liệu cho bảng `ctdvu`
---
-
-INSERT INTO `ctdvu` (`maphieudvu`, `madv`, `ngaysudungdv`, `soluong`, `thanhtien`) VALUES
-('PDVU1', 'AnSang', '2020-10-26', 2, 400000),
-('PDVU1', 'GiatUi', '2020-10-26', 1, 20000),
-('PDVU2', 'AnToi', '2020-11-01', 4, 1000000),
-('PDVU2', 'AnToi', '2020-11-02', 4, 1000000),
-('PDVU2', 'Casino', '2020-11-03', 2, 500000),
-('PDVU3', 'AnSang', '2020-11-06', 2, 500000),
-('PDVU3', 'Spa', '2020-11-06', 2, 800000),
-('PDVU4', 'AnBuffet', '2020-11-09', 4, 1000000),
-('PDVU4', 'AnSang', '2020-11-09', 4, 800000);
-
 -- --------------------------------------------------------
 
 --
@@ -171,26 +126,6 @@ CREATE TABLE `ctnhapkho` (
   `thanhtien` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Đang đổ dữ liệu cho bảng `ctnhapkho`
---
-
-INSERT INTO `ctnhapkho` (`mapnk`, `mahang`, `slchungtu`, `slthucnhap`, `thanhtien`) VALUES
-('PNK0001', 'HH1', 10, 10, 500000),
-('PNK0001', 'HH10', 40, 40, 400000),
-('PNK0002', 'HH2', 50, 50, 5000000),
-('PNK0003', 'HH3', 4, 4, 100000),
-('PNK0003', 'HH5', 51, 51, 612000),
-('PNK0004', 'HH10', 30, 29, 290000),
-('PNK0005', 'HH4', 50, 50, 3750000),
-('PNK0006', 'HH7', 10, 10, 1750000),
-('PNK0007', 'HH8', 20, 20, 300000),
-('PNK0008', 'HH5', 30, 30, 360000),
-('PNK0008', 'HH9', 10, 10, 150000),
-('PNK0009', 'HH3', 60, 58, 1450000),
-('PNK0010', 'HH1', 50, 50, 250000),
-('PNK0010', 'HH10', 40, 40, 400000);
-
 -- --------------------------------------------------------
 
 --
@@ -204,18 +139,6 @@ CREATE TABLE `ctxuatkho` (
   `slthucxuat` int(11) NOT NULL,
   `thanhtien` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Đang đổ dữ liệu cho bảng `ctxuatkho`
---
-
-INSERT INTO `ctxuatkho` (`mapxk`, `mahang`, `slyeucau`, `slthucxuat`, `thanhtien`) VALUES
-('PXK1', 'HH10', 20, 20, 200000),
-('PXK2', 'HH2', 10, 10, 100000),
-('PXK3', 'HH5', 20, 20, 240000),
-('PXK4', 'HH8', 5, 5, 40000),
-('PXK5', 'HH4', 10, 10, 750000),
-('PXK6', 'HH6', 10, 10, 500000);
 
 -- --------------------------------------------------------
 
@@ -266,21 +189,15 @@ CREATE TABLE `hanghoa` (
 --
 
 INSERT INTO `hanghoa` (`mahang`, `makho`, `tenhang`, `gia`, `donvitinh`, `soluong`) VALUES
-('HH1', 'MK2', 'Khăn mặt', 5000, 'cái', 90),
-('HH10', 'MK1', 'Coca Cola', 10000, 'Chai', 100),
-('HH11', 'MK1', 'Bánh chà bông Karo', 200000, 'Thùng', 10),
-('HH12', 'MK1', 'Rượu vang đỏ Đà Lạt', 300000, 'Chai', 100),
-('HH13', 'MK1', 'Bia Heineken không cồn', 50000, 'Thùng', 50),
-('HH14', 'MK1', 'Thịt bò Kobe', 1500000, 'Kg', 5),
-('HH15', 'MK1', 'Sữa tươi Long Thành', 50000, 'Chai', 150),
-('HH2', 'MK2', 'Bàn chải đánh răng', 10000, 'cái', 70),
-('HH3', 'MK2', 'Dép', 25000, 'đôi', 125),
-('HH4', 'MK2', 'Áo choàng tắm', 75000, 'cái', 200),
-('HH5', 'MK2', 'Bao gối', 12000, 'cái', 120),
-('HH6', 'MK2', 'Ga giường', 50000, 'cái', 20),
-('HH7', 'MK2', 'Chăn', 175000, 'cái', 20),
-('HH8', 'MK2', 'Dầu gội', 15000, 'tuýp', 25),
-('HH9', 'MK2', 'Sữa tắm', 15000, 'tuýp', 20);
+('HH1', 'MK1', 'Khăn mặt', 5000, 'cái', 20),
+('HH2', 'MK1', 'Bàn chải đánh răng', 10000, 'cái', 20),
+('HH3', 'MK1', 'Dép', 25000, 'đôi', 20),
+('HH4', 'MK1', 'Áo choàng tắm', 75000, 'cái', 20),
+('HH5', 'MK1', 'Bao gối', 12000, 'cái', 20),
+('HH6', 'MK1', 'Ga giường', 50000, 'cái', 20),
+('HH7', 'MK1', 'Chăn', 175000, 'cái', 20),
+('HH8', 'MK1', 'Dầu gội', 15000, 'tuýp', 20),
+('HH9', 'MK1', 'Sữa tắm', 15000, 'tuýp', 20);
 
 -- --------------------------------------------------------
 
@@ -301,17 +218,6 @@ CREATE TABLE `hoadon` (
   `thuctra` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Đang đổ dữ liệu cho bảng `hoadon`
---
-
-INSERT INTO `hoadon` (`mahd`, `madat`, `manv`, `makm`, `ngaylaphd`, `tienphong`, `tiendvu`, `tongtien`, `tienkm`, `thuctra`) VALUES
-('HD1', 'PD1', 'LT1', 'KM0', '2020-10-30', 1000000, 420000, 1420000, 0, 1420000),
-('HD2', 'PD2', 'LT2', 'KM0', '2020-11-04', 13500000, 0, 13500000, 0, 13500000),
-('HD3', 'PD3', 'LT2', 'KM0', '2020-11-05', 14000000, 2500000, 16500000, 0, 16500000),
-('HD4', 'PD4', 'LT2', 'KM0', '2020-11-07', 6000000, 0, 7300000, 0, 7300000),
-('HD5', 'PD5', 'LT1', 'KM0', '2020-11-10', 105000000, 1800000, 106800000, 0, 106800000);
-
 -- --------------------------------------------------------
 
 --
@@ -320,27 +226,12 @@ INSERT INTO `hoadon` (`mahd`, `madat`, `manv`, `makm`, `ngaylaphd`, `tienphong`,
 
 CREATE TABLE `khachhang` (
   `makh` char(15) NOT NULL,
-  `hotenkh` varchar(255) NOT NULL,
-  `ngaysinh` date NOT NULL,
+  `tenkh` varchar(255) NOT NULL,
+  `namsinh` int(4) NOT NULL,
   `sdt` char(15) NOT NULL,
   `email` char(30) NOT NULL,
   `diachi` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Đang đổ dữ liệu cho bảng `khachhang`
---
-
-INSERT INTO `khachhang` (`makh`, `hotenkh`, `ngaysinh`, `sdt`, `email`, `diachi`) VALUES
-('022987651', 'Nguyễn Hoàng Quỳnh', '0000-00-00', '097822198', 'hanquin@gmail.com', '45 Hoàng Văn Thụ, Tân Bình, HCM'),
-('02345694', 'Trần Quốc Văn', '0000-00-00', '0723238120', 'tqvan@gmail.com', '9 Nguyễn Văn Nghi, Gò Vấp, HCM'),
-('024877914', 'Trần Nguyễn Phương Nhung', '0000-00-00', '0739256432', 'phuongnhung17@gmail.com', '4 đường số 2, quận 12, HCM'),
-('025623341', 'Hà Trần Phương Hằng', '0000-00-00', '0724578224', 'htphang96@gmail.com', '123 Nguyễn Đình Chiểu, quận 3, HCM'),
-('026352512', 'Phan Huy Hùng', '0000-00-00', '0928125434', 'hhung@gmail.com', '12 Nguyên Hồng, Tân Bình, HCM'),
-('031245692', 'Nguyễn Như Ý', '0000-00-00', '093644128', 'benjamin@gmail.com', ''),
-('045613583', 'Nguyễn Thu Hồng', '0000-00-00', '0772287614', 'pinky95@gmail.com', '5/59 Trần Huy Liệu, PN, HCM'),
-('31195855', 'Joshua Hong', '0000-00-00', '0732235631', 'jshua32@gmail.com', ''),
-('53338006', 'Hoàng Xuân Sang', '0000-00-00', '0725981392', 'sanghx@gmail.com', '');
 
 -- --------------------------------------------------------
 
@@ -359,8 +250,8 @@ CREATE TABLE `kho` (
 --
 
 INSERT INTO `kho` (`makho`, `tenkho`, `vitrikho`) VALUES
-('MK1', 'Thực phẩm', 'A1'),
-('MK2', 'Vật dụng phòng', 'A2');
+('MK1', 'Kho hàng 1', ''),
+('MK2', 'Kho hàng 2', '');
 
 -- --------------------------------------------------------
 
@@ -375,13 +266,6 @@ CREATE TABLE `khuyenmai` (
   `ngaybd` date NOT NULL,
   `ngaykt` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Đang đổ dữ liệu cho bảng `khuyenmai`
---
-
-INSERT INTO `khuyenmai` (`makm`, `tenkm`, `phantramkm`, `ngaybd`, `ngaykt`) VALUES
-('KM0', 'Không có khuyến mãi', 0, '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -423,12 +307,28 @@ CREATE TABLE `loaiphong` (
 --
 
 INSERT INTO `loaiphong` (`maloaiph`, `tenloai`, `slnguoi`, `dientich`, `dongia`, `mota`) VALUES
-('CC1', 'Phòng cao cấp 1 giường', 2, 30, 2000000, 'phòng đôi dành cho 1 -2 người, không gian thoáng mát, đầy đủ tiện nghi'),
-('CC2', 'Phòng cao cấp 2 giường', 4, 35, 2500000, 'phòng đôi dành cho 4 - 6 người, không gian thoáng mát, đầy đủ tiện nghi'),
-('TC1', 'Phòng tiêu chuẩn 1 giường', 2, 25, 1000000, 'phòng đơn thường dành cho 1 hoặc 2 người, không gian thoáng mát'),
-('TC2', 'Phòng tiêu chuẩn 2 giường', 4, 30, 1500000, 'phòng đôi dành cho 4 - 6 người, không gian thoáng mát'),
-('VIP1', 'Phòng VIP 1 giường', 2, 40, 3000000, 'phòng đôi dành cho 1 - 2 người, không gian thoáng mát, đầy đủ tiện nghi, trang thiết bị hiện đại'),
-('VIP2', 'Phòng VIP 2 giường', 4, 45, 4000000, 'phòng đôi dành cho 4 - 6 người, không gian thoáng mát, đầy đủ tiện nghi, trang thiết bị hiện đại');
+('PD1', 'phòng đơn 1 giường', 2, 25, 2000000, 'phòng đơn thường dành cho 1 hoặc 2 người, không gian thoáng mát'),
+('PD1CC', 'phòng 1 giường cao cấp', 2, 30, 3000000, 'phòng đôi dành cho 1 -2 người, không gian thoáng mát, đầy đủ tiện nghi'),
+('PD1TC', 'phòng đơn 1 giường tiêu chuẩn', 2, 25, 2000000, 'phòng đơn thường dành cho 1 hoặc 2 người, không gian thoáng mát'),
+('PD1VIP', 'phòng 1 giường VIP', 2, 40, 5000000, 'phòng đôi dành cho 1 - 2 người, không gian thoáng mát, đầy đủ tiện nghi, trang thiết bị hiện đại'),
+('PD2', 'phòng 2 giường', 4, 30, 3000000, 'phòng đôi dành cho 4 - 6 người, không gian thoáng mát'),
+('PD2CC', 'phòng 2 giường tiêu chuẩn', 4, 35, 3000000, 'phòng đôi dành cho 4 - 6 người, không gian thoáng mát, đầy đủ tiện nghi'),
+('PD2TC', 'phòng 2 giường tiêu chuẩn', 4, 30, 3000000, 'phòng đôi dành cho 4 - 6 người, không gian thoáng mát'),
+('PD2VIP', 'phòng 2 giường VIP', 4, 45, 7000000, 'phòng đôi dành cho 4 - 6 người, không gian thoáng mát, đầy đủ tiện nghi, trang thiết bị hiện đại');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `luong`
+--
+
+CREATE TABLE `luong` (
+  `manv` varchar(10) NOT NULL,
+  `luongcoban` int(11) NOT NULL,
+  `tonggiolam` int(11) NOT NULL,
+  `tongngaylam` int(11) NOT NULL,
+  `tongluong` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -451,13 +351,7 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`manv`, `macv`, `tennv`, `ngaysinh`, `gioitinh`, `diachi`, `sdt`) VALUES
-('BP1', 'BP', 'Trịnh Xuân Thanh', '1979-08-18', 'Nam', '293 Lý Thường Kiệt, Quận 10, TPHCM', '0914928120'),
-('BP2', 'BP', 'Nguyễn Thị Ánh Hồng', '1992-11-10', 'Nữ', '124 An Dương Vương, Quận 5, TPHCM', '0381498484'),
-('BP3', 'BP', 'Nguyễn Ngọc Bảo Long', '1996-04-23', 'Nam', '4 Hùng Vương, Quận 7, TPHCM', '0923174808'),
-('BP4', 'BP', 'Nguyễn Thị Mai', '1989-03-12', 'Nữ', '271 Nguyễn Văn Cừ, Quận 5, TPHCM', '0370278080'),
-('BV1', 'BV', 'Phan Tuấn Long', '1989-09-15', 'Nam', '69, Phù Đổng Thiên Vương, Phường 11 Quận 5, TpHCM', '0365784925'),
-('BV2', 'BV', 'Trịnh Xuân Hồng', '1992-05-14', 'Nam', '79 Nguyễn Chí Thanh, Quận 10, TPHHCM', '0382799423'),
-('GX1', 'GX', 'Hoàng Văn Quý', '1970-09-04', 'Nam', '45 Phan văn Trị, Bình Thạnh ', '0988561243'),
+('GX1', 'GX', 'Hoàng Văn Quý', '1970-09-04', 'Nam', '45 Phan văn Trị, Bình Thạnh ', '098856124'),
 ('GX2', 'GX', 'Đỗ Văn Đậu', '1998-11-12', 'Nam', '4 đường số 2, quận 12, HCM', '0933361458'),
 ('KD1', 'KD', 'Nguyễn Văn An', '1990-10-01', 'Nam', '12 Lý Thường Kiệt,Tân Bình, HCM', '0932234546'),
 ('KD2', 'KD', 'Nguyễn Thúy Vân', '1994-10-27', 'Nữ', '12 Mai Chí Thọ, quận 2, HCM', '0368221130'),
@@ -466,9 +360,7 @@ INSERT INTO `nhanvien` (`manv`, `macv`, `tennv`, `ngaysinh`, `gioitinh`, `diachi
 ('LT2', 'LT', 'Phạm Anh Thư', '1995-09-03', 'Nữ', '25/56 Tân Kỳ Tân Quý, Tân Phú, HCM', '0258420163'),
 ('QL1', 'QL', 'Nguyễn Minh Ngọc', '1984-07-01', 'Nữ', '99 Lê Văn Sỹ, quận 3, HCM', '0782664518'),
 ('TK1', 'TK', 'Trần Trọng Trí', '1985-05-07', 'Nam', '7 Phan Xích Long, Phú Nhuận, HCM', '0334677122'),
-('TK2', 'TK', 'Từ Quảng Long', '1990-07-03', 'Nam', '42 Tôn Thấp Thiệp, quận 1, HCM', '0983445678'),
-('TV1', 'TV', 'Nguyễn Thị Xuân', '1989-11-19', 'Nữ', '69 Ngô Quyền, Quận 5, TPHCM', '0397421798'),
-('TV2', 'TV', 'Trần Thị Yến', '1991-05-12', 'Nữ', '339 An Dương Vương, Phường 4, Quận 5, TPHCM', '0911692450');
+('TK2', 'TK', 'Từ Quảng Long', '1990-07-03', 'Nam', '42 Tôn Thấp Thiệp, quận 1, HCM', '0983445678');
 
 -- --------------------------------------------------------
 
@@ -492,16 +384,19 @@ CREATE TABLE `nhanxe` (
 CREATE TABLE `phancong` (
   `maca` char(15) NOT NULL,
   `manv` char(15) NOT NULL,
-  `ngaylam` date NOT NULL
+  `ngaybatdau` date NOT NULL,
+  `ngayketthuc` date NOT NULL,
+  `Thu` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `phancong`
 --
 
-INSERT INTO `phancong` (`maca`, `manv`, `ngaylam`) VALUES
-('HC1C', 'LT1', '2020-11-10'),
-('PV1', 'GX1', '2020-11-09');
+INSERT INTO `phancong` (`maca`, `manv`, `ngaybatdau`, `ngayketthuc`, `Thu`) VALUES
+('HC1S', 'KD2', '2020-11-23', '2020-11-24', 2),
+('HC1S', 'LT1', '2020-11-10', '2020-11-26', 2),
+('PV1', 'GX1', '2020-11-09', '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
@@ -517,22 +412,6 @@ CREATE TABLE `phieudathang` (
   `tennhacc` varchar(255) NOT NULL,
   `thoigiangiao` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Đang đổ dữ liệu cho bảng `phieudathang`
---
-
-INSERT INTO `phieudathang` (`mapdh`, `manv`, `tongsl`, `tongtien`, `tennhacc`, `thoigiangiao`) VALUES
-('PDH0001', 'TK1', 0, 0, 'Mỹ An', '2020-06-03'),
-('PDH0002', 'TK1', 0, 0, 'Mỹ Nhung', '2020-07-13'),
-('PDH0003', 'TK2', 0, 0, 'Mỹ An', '2020-07-31'),
-('PDH0004', 'TK2', 0, 0, 'Mỹ Nhung', '2020-08-02'),
-('PDH0005', 'TK1', 0, 0, 'Mỹ An', '2020-09-09'),
-('PDH0006', 'TK1', 0, 0, 'Mỹ An', '2020-09-16'),
-('PDH0007', 'TK2', 0, 0, 'Thành Minh', '2020-09-22'),
-('PDH0008', 'TK2', 0, 0, 'Minh Bảo', '2020-11-01'),
-('PDH0009', 'TK2', 0, 0, 'Bảo Minh', '2020-11-02'),
-('PDH0010', 'TK2', 0, 0, 'Bảo Bảo', '2020-11-16');
 
 -- --------------------------------------------------------
 
@@ -554,21 +433,6 @@ CREATE TABLE `phieudatphong` (
   `trangthai` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Đang đổ dữ liệu cho bảng `phieudatphong`
---
-
-INSERT INTO `phieudatphong` (`madat`, `makhdat`, `manv`, `ngaydatphong`, `ngayden`, `ngaydi`, `tienphong`, `tiencoc`, `tennguoiluutru`, `cmndnguoiluutru`, `trangthai`) VALUES
-('PD1', '02345694', 'LT1', '2020-10-20', '2020-10-25', '2020-10-30', 2000000, 1000000, '', '', 'Đã nhận phòng'),
-('PD2', '025623341', 'LT1', '2020-11-01', '2020-11-01', '2020-11-04', 13500000, 0, 'Lê Văn Tài', '024651293', 'Đã nhận phòng'),
-('PD3', '024877914', 'LT1', '2020-11-01', '2020-11-01', '2020-11-08', 14000000, 0, '', '', 'Đã nhận phòng'),
-('PD4', '026352512', 'LT2', '2020-11-02', '2020-11-05', '2020-11-08', 12000000, 6000000, 'Trần Đăng Khoa', '026745691', 'Đã nhận phòng'),
-('PD5', '045613583', 'LT2', '2020-11-09', '2020-11-09', '2020-11-30', 5000000, 0, '', '', 'Đã nhận phòng'),
-('PD6', '31195855', 'LT2', '2020-11-09', '2020-11-12', '2020-11-15', 6000000, 3000000, 'Lương Văn Quá', '024585693', 'Đã hủy'),
-('PD7', '026352512', 'LT2', '2020-11-10', '2020-11-15', '2020-11-18', 9000000, 0, 'Ngô Minh Huy', '023674532', 'Chờ nhận phòng'),
-('PD8', '031245692', 'LT2', '2020-11-12', '2020-11-20', '2020-11-25', 10000000, 5000000, 'Lê Đại Dương', '026782462', 'Chờ nhận phòng'),
-('PD9', '031245692', 'LT2', '2020-11-12', '2020-11-13', '2020-11-16', 0, 0, '', '', '');
-
 -- --------------------------------------------------------
 
 --
@@ -577,20 +441,9 @@ INSERT INTO `phieudatphong` (`madat`, `makhdat`, `manv`, `ngaydatphong`, `ngayde
 
 CREATE TABLE `phieudvu` (
   `maphieudvu` char(15) NOT NULL,
-  `madat` char(15) NOT NULL,
   `ngaylapphieu` date NOT NULL,
   `tongtien` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Đang đổ dữ liệu cho bảng `phieudvu`
---
-
-INSERT INTO `phieudvu` (`maphieudvu`, `madat`, `ngaylapphieu`, `tongtien`) VALUES
-('PDVU1', 'PD1', '2020-10-26', 420000),
-('PDVU2', 'PD3', '2020-11-01', 2500000),
-('PDVU3', 'PD4', '2020-11-06', 1300000),
-('PDVU4', 'PD5', '2020-11-09', 1800000);
 
 -- --------------------------------------------------------
 
@@ -606,13 +459,6 @@ CREATE TABLE `phieuhuy` (
   `lydo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Đang đổ dữ liệu cho bảng `phieuhuy`
---
-
-INSERT INTO `phieuhuy` (`mahuy`, `madat`, `manv`, `ngayhuy`, `lydo`) VALUES
-('PHUY1', 'PD6', 'LT2', '2020-11-11', 'Khách bận việc đột xuất, không tới nhận phòng được');
-
 -- --------------------------------------------------------
 
 --
@@ -624,28 +470,12 @@ CREATE TABLE `phieunhapkho` (
   `makho` char(15) NOT NULL,
   `manv` char(15) NOT NULL,
   `ngaynhapkho` date NOT NULL,
-  `tongsltrenchungtu` int(11) NOT NULL,
+  `tongslchungtu` int(11) NOT NULL,
   `tongslthucnhap` int(11) NOT NULL,
   `tongtien` int(11) NOT NULL,
   `tennguoigiao` varchar(255) NOT NULL,
   `ghichu` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Đang đổ dữ liệu cho bảng `phieunhapkho`
---
-
-INSERT INTO `phieunhapkho` (`mapnk`, `makho`, `manv`, `ngaynhapkho`, `tongsltrenchungtu`, `tongslthucnhap`, `tongtien`, `tennguoigiao`, `ghichu`) VALUES
-('PNK0001', 'MK2', 'TK1', '2020-06-03', 50, 50, 0, 'Thái Phùng Bảo Minh', ''),
-('PNK0002', 'MK1', 'TK2', '2020-07-13', 50, 50, 0, 'Trần Mạnh Hùng', ''),
-('PNK0003', 'MK1', 'TK1', '2020-07-31', 55, 55, 0, 'Nguyễn Mạnh Hùng', ''),
-('PNK0004', 'MK2', 'TK2', '2020-08-02', 30, 29, 0, 'Trần Văn Chiến', ''),
-('PNK0005', 'MK2', 'TK1', '2020-09-09', 50, 50, 0, 'Nguyễn Văn Chiến', ''),
-('PNK0006', 'MK2', 'TK1', '2020-09-16', 10, 10, 0, 'Phùng Thái Bảo', ''),
-('PNK0007', 'MK2', 'TK1', '2020-09-22', 20, 20, 0, 'Nguyễn Văn Chiến', ''),
-('PNK0008', 'MK1', 'TK1', '2020-11-01', 40, 40, 0, 'Huỳnh Văn Bảy', ''),
-('PNK0009', 'MK2', 'TK2', '2020-11-02', 60, 58, 0, 'Huỳnh Văn BẢy', ''),
-('PNK0010', 'MK1', 'TK2', '2020-11-16', 60, 60, 0, 'Trần Văn Chiến', '');
 
 -- --------------------------------------------------------
 
@@ -665,18 +495,6 @@ CREATE TABLE `phieuxuatkho` (
   `lydoxuatkho` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Đang đổ dữ liệu cho bảng `phieuxuatkho`
---
-
-INSERT INTO `phieuxuatkho` (`mapxk`, `makho`, `manv`, `ngayxuatkho`, `tongslyeucau`, `tongslthucxuat`, `tongtien`, `manv_nhanhang`, `lydoxuatkho`) VALUES
-('PXK1', 'MK1', 'TK1', '2020-09-10', 20, 20, 0, 'BP3', 'Thực phẩm nấu ăn'),
-('PXK2', 'MK1', 'TK1', '2020-09-24', 10, 10, 0, 'BP4', 'Thực phẩm náu ăn'),
-('PXK3', 'MK1', 'TK2', '2020-09-29', 20, 20, 0, 'BP4', 'Thực phẩm náu ăn'),
-('PXK4', 'MK2', 'TK1', '2020-10-08', 5, 5, 0, 'TV1', 'Thiếu vật dụng'),
-('PXK5', 'MK2', 'TK2', '2020-10-20', 10, 10, 0, 'GX1', 'Thiếu dụng cụ'),
-('PXK6', 'MK1', 'TK1', '2020-10-30', 10, 10, 0, 'BP2', 'Thực phẩm nấu ăn');
-
 -- --------------------------------------------------------
 
 --
@@ -689,47 +507,6 @@ CREATE TABLE `phong` (
   `tang` int(11) NOT NULL,
   `mota` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Đang đổ dữ liệu cho bảng `phong`
---
-
-INSERT INTO `phong` (`maphong`, `maloaiph`, `tang`, `mota`) VALUES
-('101', 'TC1', 1, 'Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, hệ thống điều hòa'),
-('102', 'TC1', 1, 'Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, hệ thống điều hòa'),
-('103', 'TC1', 1, 'Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, hệ thống điều hòa'),
-('104', 'TC1', 1, 'Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, hệ thống điều hòa'),
-('105', 'TC1', 1, 'Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, hệ thống điều hòa'),
-('106', 'TC1', 1, 'Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, hệ thống điều hòa'),
-('107', 'TC1', 1, 'Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, hệ thống điều hòa'),
-('108', 'TC2', 1, 'Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, hệ thống điều hòa'),
-('109', 'TC2', 1, 'Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, hệ thống điều hòa'),
-('110', 'TC2', 1, 'Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, hệ thống điều hòa'),
-('111', 'TC2', 1, 'Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, hệ thống điều hòa'),
-('112', 'TC2', 1, 'Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, hệ thống điều hòa'),
-('113', 'TC2', 1, 'Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, hệ thống điều hòa'),
-('114', 'TC2', 1, 'Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, hệ thống điều hòa'),
-('115', 'TC2', 1, 'Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, hệ thống điều hòa'),
-('201', 'CC1', 2, 'View đẹp, sofa, bàn cafe, mini bar, Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, bồn tắm, hệ thống điều hòa'),
-('202', 'CC1', 2, 'View đẹp, sofa, bàn cafe, mini bar, Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, bồn tắm, hệ thống điều hòa'),
-('203', 'CC1', 2, 'View đẹp, sofa, bàn cafe, mini bar, Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, bồn tắm, hệ thống điều hòa'),
-('204', 'CC1', 2, 'View đẹp, sofa, bàn cafe, mini bar, Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, bồn tắm, hệ thống điều hòa'),
-('205', 'CC1', 2, 'View đẹp, sofa, bàn cafe, mini bar, Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, bồn tắm, hệ thống điều hòa'),
-('206', 'CC2', 2, 'View đẹp, sofa, bàn cafe, mini bar, Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, bồn tắm, hệ thống điều hòa'),
-('207', 'CC2', 2, 'View đẹp, sofa, bàn cafe, mini bar, Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, bồn tắm, hệ thống điều hòa'),
-('208', 'CC2', 2, 'View đẹp, sofa, bàn cafe, mini bar, Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, bồn tắm, hệ thống điều hòa'),
-('209', 'CC2', 2, 'View đẹp, sofa, bàn cafe, mini bar, Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, bồn tắm, hệ thống điều hòa'),
-('210', 'CC2', 2, 'View đẹp, sofa, bàn cafe, mini bar, Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, bồn tắm, hệ thống điều hòa'),
-('301', 'CC2', 3, 'View đẹp, sofa, bàn cafe, mini bar, Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, bồn tắm, hệ thống điều hòa'),
-('302', 'CC2', 3, 'View đẹp, sofa, bàn cafe, mini bar, Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, bồn tắm, hệ thống điều hòa'),
-('303', 'CC2', 3, 'View đẹp, sofa, bàn cafe, mini bar, Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, bồn tắm, hệ thống điều hòa'),
-('304', 'CC2', 3, 'View đẹp, sofa, bàn cafe, mini bar, Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, bồn tắm, hệ thống điều hòa'),
-('305', 'CC2', 3, 'View đẹp, sofa, bàn cafe, mini bar, Wifi miễn phí, TV, phòng tắm vòi sen nóng/lạnh, bồn tắm, hệ thống điều hòa'),
-('306', 'VIP1', 3, 'View đẹp, cách âm tốt, mini bar, tủ lạnh, Wifi miễn phí, TV, bồn tắm Jacuzzi, vòi sen nóng/lạnh, máy sấy tóc'),
-('307', 'VIP1', 3, 'View đẹp, cách âm tốt, mini bar, tủ lạnh, Wifi miễn phí, TV, bồn tắm Jacuzzi, vòi sen nóng/lạnh, máy sấy tóc'),
-('308', 'VIP2', 3, 'View đẹp, cách âm tốt, mini bar, khu vực tiếp khách, tủ lạnh, Wifi miễn phí, TV, bồn tắm Jacuzzi, vòi sen nóng/lạnh, máy sấy tóc'),
-('309', 'VIP2', 3, 'View đẹp, cách âm tốt, mini bar, khu vực tiếp khách, tủ lạnh, Wifi miễn phí, TV, bồn tắm Jacuzzi, vòi sen nóng/lạnh, máy sấy tóc'),
-('310', 'VIP2', 3, 'View đẹp, cách âm tốt, mini bar, khu vực tiếp khách, tủ lạnh, Wifi miễn phí, TV, bồn tắm Jacuzzi, vòi sen nóng/lạnh, máy sấy tóc');
 
 -- --------------------------------------------------------
 
@@ -819,7 +596,8 @@ ALTER TABLE `chucvu`
 --
 ALTER TABLE `ctdat`
   ADD PRIMARY KEY (`madat`,`maphong`),
-  ADD KEY `fk_ctdat_phong` (`maphong`);
+  ADD KEY `fk_ctdat_phong` (`maphong`),
+  ADD KEY `fk_ctdat_phieudvu` (`maphieudvu`);
 
 --
 -- Chỉ mục cho bảng `ctdathang`
@@ -832,7 +610,7 @@ ALTER TABLE `ctdathang`
 -- Chỉ mục cho bảng `ctdvu`
 --
 ALTER TABLE `ctdvu`
-  ADD PRIMARY KEY (`maphieudvu`,`madv`,`ngaysudungdv`),
+  ADD PRIMARY KEY (`maphieudvu`,`madv`),
   ADD KEY `fk_ctdvu_dichvu` (`madv`);
 
 --
@@ -903,6 +681,12 @@ ALTER TABLE `loaiphong`
   ADD PRIMARY KEY (`maloaiph`);
 
 --
+-- Chỉ mục cho bảng `luong`
+--
+ALTER TABLE `luong`
+  ADD KEY `manv` (`manv`);
+
+--
 -- Chỉ mục cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
@@ -942,8 +726,7 @@ ALTER TABLE `phieudatphong`
 -- Chỉ mục cho bảng `phieudvu`
 --
 ALTER TABLE `phieudvu`
-  ADD PRIMARY KEY (`maphieudvu`),
-  ADD KEY `fk_phieudvu_phieudatphong` (`madat`);
+  ADD PRIMARY KEY (`maphieudvu`);
 
 --
 -- Chỉ mục cho bảng `phieuhuy`
@@ -967,8 +750,7 @@ ALTER TABLE `phieunhapkho`
 ALTER TABLE `phieuxuatkho`
   ADD PRIMARY KEY (`mapxk`),
   ADD KEY `fk_phieuxuatkho_kho` (`makho`),
-  ADD KEY `fk_phieuxuatkho_nhanvien` (`manv`),
-  ADD KEY `fk_phieuxutkho_nhanvien2` (`manv_nhanhang`);
+  ADD KEY `fk_phieuxuatkho_nhanvien` (`manv`);
 
 --
 -- Chỉ mục cho bảng `phong`
@@ -1013,6 +795,7 @@ ALTER TABLE `traxe`
 --
 ALTER TABLE `ctdat`
   ADD CONSTRAINT `fk_ctdat_phieudatphong` FOREIGN KEY (`madat`) REFERENCES `phieudatphong` (`madat`),
+  ADD CONSTRAINT `fk_ctdat_phieudvu` FOREIGN KEY (`maphieudvu`) REFERENCES `phieudvu` (`maphieudvu`),
   ADD CONSTRAINT `fk_ctdat_phong` FOREIGN KEY (`maphong`) REFERENCES `phong` (`maphong`);
 
 --
@@ -1065,6 +848,12 @@ ALTER TABLE `hoadon`
   ADD CONSTRAINT `fk_hoadon_phieudatphong` FOREIGN KEY (`madat`) REFERENCES `phieudatphong` (`madat`);
 
 --
+-- Các ràng buộc cho bảng `luong`
+--
+ALTER TABLE `luong`
+  ADD CONSTRAINT `luong_ibfk_1` FOREIGN KEY (`manv`) REFERENCES `nhanvien` (`manv`);
+
+--
 -- Các ràng buộc cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
@@ -1097,12 +886,6 @@ ALTER TABLE `phieudatphong`
   ADD CONSTRAINT `pk_phieudatphonng_nhanvien` FOREIGN KEY (`manv`) REFERENCES `nhanvien` (`manv`);
 
 --
--- Các ràng buộc cho bảng `phieudvu`
---
-ALTER TABLE `phieudvu`
-  ADD CONSTRAINT `fk_phieudvu_phieudatphong` FOREIGN KEY (`madat`) REFERENCES `phieudatphong` (`madat`);
-
---
 -- Các ràng buộc cho bảng `phieuhuy`
 --
 ALTER TABLE `phieuhuy`
@@ -1121,8 +904,7 @@ ALTER TABLE `phieunhapkho`
 --
 ALTER TABLE `phieuxuatkho`
   ADD CONSTRAINT `fk_phieuxuatkho_kho` FOREIGN KEY (`makho`) REFERENCES `kho` (`makho`),
-  ADD CONSTRAINT `fk_phieuxuatkho_nhanvien` FOREIGN KEY (`manv`) REFERENCES `nhanvien` (`manv`),
-  ADD CONSTRAINT `fk_phieuxutkho_nhanvien2` FOREIGN KEY (`manv_nhanhang`) REFERENCES `nhanvien` (`manv`);
+  ADD CONSTRAINT `fk_phieuxuatkho_nhanvien` FOREIGN KEY (`manv`) REFERENCES `nhanvien` (`manv`);
 
 --
 -- Các ràng buộc cho bảng `phong`
