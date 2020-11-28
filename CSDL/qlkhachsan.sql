@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 13, 2020 lúc 11:12 AM
--- Phiên bản máy phục vụ: 10.4.6-MariaDB
--- Phiên bản PHP: 7.3.9
+-- Thời gian đã tạo: Th10 28, 2020 lúc 02:48 PM
+-- Phiên bản máy phục vụ: 10.4.11-MariaDB
+-- Phiên bản PHP: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -30,7 +29,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `calam` (
   `maca` char(15) NOT NULL,
-  `tiencong` int(11) NOT NULL,
   `giobatdau` time NOT NULL,
   `gioketthuc` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -39,14 +37,14 @@ CREATE TABLE `calam` (
 -- Đang đổ dữ liệu cho bảng `calam`
 --
 
-INSERT INTO `calam` (`maca`, `tiencong`, `giobatdau`, `gioketthuc`) VALUES
-('BT1C', 40000, '13:00:00', '17:00:00'),
-('BT1S', 40000, '07:30:00', '11:30:00'),
-('HC1C', 40000, '13:00:00', '17:00:00'),
-('HC1S', 40000, '07:30:00', '11:30:00'),
-('PV1', 40000, '06:00:00', '14:00:00'),
-('PV2', 40000, '00:00:00', '22:00:00'),
-('PV3', 40000, '22:00:00', '06:00:00');
+INSERT INTO `calam` (`maca`, `giobatdau`, `gioketthuc`) VALUES
+('BT1C', '13:00:00', '17:00:00'),
+('BT1S', '07:30:00', '11:30:00'),
+('HC1C', '13:00:00', '17:00:00'),
+('HC1S', '07:30:00', '11:30:00'),
+('PV1', '06:00:00', '14:00:00'),
+('PV2', '00:00:00', '22:00:00'),
+('PV3', '22:00:00', '06:00:00');
 
 -- --------------------------------------------------------
 
@@ -94,6 +92,11 @@ CREATE TABLE `ctdat` (
 INSERT INTO `ctdat` (`madat`, `maphong`, `dongia`) VALUES
 ('PD1', '101', 1000000),
 ('PD1', '102', 1000000),
+('PD10', '201', 2000000),
+('PD10', '202', 2000000),
+('PD10', '203', 2000000),
+('PD11', '201', 2000000),
+('PD11', '207', 2500000),
 ('PD2', '110', 1500000),
 ('PD2', '111', 1500000),
 ('PD2', '113', 1500000),
@@ -332,15 +335,15 @@ CREATE TABLE `khachhang` (
 --
 
 INSERT INTO `khachhang` (`makh`, `hotenkh`, `ngaysinh`, `sdt`, `email`, `diachi`) VALUES
-('022987651', 'Nguyễn Hoàng Quỳnh', '0000-00-00', '097822198', 'hanquin@gmail.com', '45 Hoàng Văn Thụ, Tân Bình, HCM'),
-('02345694', 'Trần Quốc Văn', '0000-00-00', '0723238120', 'tqvan@gmail.com', '9 Nguyễn Văn Nghi, Gò Vấp, HCM'),
-('024877914', 'Trần Nguyễn Phương Nhung', '0000-00-00', '0739256432', 'phuongnhung17@gmail.com', '4 đường số 2, quận 12, HCM'),
-('025623341', 'Hà Trần Phương Hằng', '0000-00-00', '0724578224', 'htphang96@gmail.com', '123 Nguyễn Đình Chiểu, quận 3, HCM'),
-('026352512', 'Phan Huy Hùng', '0000-00-00', '0928125434', 'hhung@gmail.com', '12 Nguyên Hồng, Tân Bình, HCM'),
-('031245692', 'Nguyễn Như Ý', '0000-00-00', '093644128', 'benjamin@gmail.com', ''),
-('045613583', 'Nguyễn Thu Hồng', '0000-00-00', '0772287614', 'pinky95@gmail.com', '5/59 Trần Huy Liệu, PN, HCM'),
-('31195855', 'Joshua Hong', '0000-00-00', '0732235631', 'jshua32@gmail.com', ''),
-('53338006', 'Hoàng Xuân Sang', '0000-00-00', '0725981392', 'sanghx@gmail.com', '');
+('022987651', 'Nguyễn Hoàng Quỳnh', '1990-01-15', '097822198', 'hanquin@gmail.com', '45 Hoàng Văn Thụ, Tân Bình, HCM'),
+('02345694', 'Trần Quốc Văn', '1990-01-15', '0723238120', 'tqvan@gmail.com', '9 Nguyễn Văn Nghi, Gò Vấp, HCM'),
+('024877914', 'Trần Nguyễn Phương Nhung', '1990-01-15', '0739256432', 'phuongnhung17@gmail.com', '4 đường số 2, quận 12, HCM'),
+('025623341', 'Hà Trần Phương Hằng', '1990-01-15', '0724578224', 'htphang96@gmail.com', '123 Nguyễn Đình Chiểu, quận 3, HCM'),
+('026352512', 'Phan Huy Hùng', '1990-01-15', '0928125434', 'hhung@gmail.com', '12 Nguyên Hồng, Tân Bình, HCM'),
+('031245692', 'Nguyễn Như Ý', '1990-01-15', '093644128', 'benjamin@gmail.com', ''),
+('045613583', 'Nguyễn Thu Hồng', '1990-01-15', '0772287614', 'pinky95@gmail.com', '5/59 Trần Huy Liệu, PN, HCM'),
+('31195855', 'Joshua Hong', '1990-01-15', '0732235631', 'jshua32@gmail.com', ''),
+('53338006', 'Hoàng Xuân Sang', '1990-01-15', '0725981392', 'sanghx@gmail.com', '');
 
 -- --------------------------------------------------------
 
@@ -433,6 +436,21 @@ INSERT INTO `loaiphong` (`maloaiph`, `tenloai`, `slnguoi`, `dientich`, `dongia`,
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `luong`
+--
+
+CREATE TABLE `luong` (
+  `manv` char(15) NOT NULL,
+  `luongcoban` int(11) NOT NULL,
+  `tonggiolam` int(11) NOT NULL,
+  `tongngaylam` int(11) NOT NULL,
+  `tongluong` int(11) NOT NULL,
+  `thang` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `nhanvien`
 --
 
@@ -492,16 +510,18 @@ CREATE TABLE `nhanxe` (
 CREATE TABLE `phancong` (
   `maca` char(15) NOT NULL,
   `manv` char(15) NOT NULL,
-  `ngaylam` date NOT NULL
+  `ngaybatdau` date NOT NULL,
+  `ngayketthuc` date NOT NULL,
+  `Thu` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `phancong`
 --
 
-INSERT INTO `phancong` (`maca`, `manv`, `ngaylam`) VALUES
-('HC1C', 'LT1', '2020-11-10'),
-('PV1', 'GX1', '2020-11-09');
+INSERT INTO `phancong` (`maca`, `manv`, `ngaybatdau`, `ngayketthuc`, `Thu`) VALUES
+('HC1C', 'LT1', '0000-00-00', '0000-00-00', 0),
+('PV1', 'GX1', '0000-00-00', '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
@@ -560,6 +580,8 @@ CREATE TABLE `phieudatphong` (
 
 INSERT INTO `phieudatphong` (`madat`, `makhdat`, `manv`, `ngaydatphong`, `ngayden`, `ngaydi`, `tienphong`, `tiencoc`, `tennguoiluutru`, `cmndnguoiluutru`, `trangthai`) VALUES
 ('PD1', '02345694', 'LT1', '2020-10-20', '2020-10-25', '2020-10-30', 2000000, 1000000, '', '', 'Đã nhận phòng'),
+('PD10', '022987651', 'LT1', '2020-11-26', '2020-12-01', '2020-12-02', 6000000, 3000000, '', '', 'Chờ nhận phòng'),
+('PD11', '022987651', 'LT1', '2020-11-27', '2020-11-28', '2020-11-30', 9000000, 4500000, '', '', 'Đã nhận phòng'),
 ('PD2', '025623341', 'LT1', '2020-11-01', '2020-11-01', '2020-11-04', 13500000, 0, 'Lê Văn Tài', '024651293', 'Đã nhận phòng'),
 ('PD3', '024877914', 'LT1', '2020-11-01', '2020-11-01', '2020-11-08', 14000000, 0, '', '', 'Đã nhận phòng'),
 ('PD4', '026352512', 'LT2', '2020-11-02', '2020-11-05', '2020-11-08', 12000000, 6000000, 'Trần Đăng Khoa', '026745691', 'Đã nhận phòng'),
@@ -567,7 +589,7 @@ INSERT INTO `phieudatphong` (`madat`, `makhdat`, `manv`, `ngaydatphong`, `ngayde
 ('PD6', '31195855', 'LT2', '2020-11-09', '2020-11-12', '2020-11-15', 6000000, 3000000, 'Lương Văn Quá', '024585693', 'Đã hủy'),
 ('PD7', '026352512', 'LT2', '2020-11-10', '2020-11-15', '2020-11-18', 9000000, 0, 'Ngô Minh Huy', '023674532', 'Chờ nhận phòng'),
 ('PD8', '031245692', 'LT2', '2020-11-12', '2020-11-20', '2020-11-25', 10000000, 5000000, 'Lê Đại Dương', '026782462', 'Chờ nhận phòng'),
-('PD9', '031245692', 'LT2', '2020-11-12', '2020-11-13', '2020-11-16', 0, 0, '', '', '');
+('PD9', '031245692', 'LT2', '2020-11-12', '2020-11-13', '2020-11-16', 0, 0, '', '', 'Chờ nhận phòng');
 
 -- --------------------------------------------------------
 
@@ -903,6 +925,12 @@ ALTER TABLE `loaiphong`
   ADD PRIMARY KEY (`maloaiph`);
 
 --
+-- Chỉ mục cho bảng `luong`
+--
+ALTER TABLE `luong`
+  ADD KEY `manv` (`manv`);
+
+--
 -- Chỉ mục cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
@@ -1065,6 +1093,12 @@ ALTER TABLE `hoadon`
   ADD CONSTRAINT `fk_hoadon_phieudatphong` FOREIGN KEY (`madat`) REFERENCES `phieudatphong` (`madat`);
 
 --
+-- Các ràng buộc cho bảng `luong`
+--
+ALTER TABLE `luong`
+  ADD CONSTRAINT `luong_ibfk_1` FOREIGN KEY (`manv`) REFERENCES `nhanvien` (`manv`);
+
+--
 -- Các ràng buộc cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
@@ -1135,6 +1169,12 @@ ALTER TABLE `phong`
 --
 ALTER TABLE `taikhoan`
   ADD CONSTRAINT `pk_taikhoan_nhanvien` FOREIGN KEY (`manv`) REFERENCES `nhanvien` (`manv`);
+
+--
+-- Các ràng buộc cho bảng `thexekhach`
+--
+ALTER TABLE `thexekhach`
+  ADD CONSTRAINT `thexekhach_ibfk_1` FOREIGN KEY (`mathe`) REFERENCES `khachhang` (`makh`);
 
 --
 -- Các ràng buộc cho bảng `thexenv`
