@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 28, 2020 lúc 02:48 PM
--- Phiên bản máy phục vụ: 10.4.11-MariaDB
--- Phiên bản PHP: 7.4.4
+-- Thời gian đã tạo: Th12 01, 2020 lúc 09:46 AM
+-- Phiên bản máy phục vụ: 10.4.13-MariaDB
+-- Phiên bản PHP: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -491,19 +491,6 @@ INSERT INTO `nhanvien` (`manv`, `macv`, `tennv`, `ngaysinh`, `gioitinh`, `diachi
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `nhanxe`
---
-
-CREATE TABLE `nhanxe` (
-  `maxevao` char(15) NOT NULL,
-  `mathe` char(15) NOT NULL,
-  `ngayvao` date NOT NULL,
-  `giovao` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `phancong`
 --
 
@@ -756,6 +743,31 @@ INSERT INTO `phong` (`maphong`, `maloaiph`, `tang`, `mota`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `qlxe`
+--
+
+CREATE TABLE `qlxe` (
+  `maxe` char(15) NOT NULL,
+  `thoigianra` datetime NOT NULL,
+  `thoigianvao` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `qlxe`
+--
+
+INSERT INTO `qlxe` (`maxe`, `thoigianra`, `thoigianvao`) VALUES
+('001', '2020-11-14 16:46:30', '2020-12-15 07:28:10'),
+('002', '2020-12-07 06:28:10', '2020-12-10 08:18:10'),
+('003', '2020-12-02 12:29:10', '2020-12-03 04:29:10'),
+('004', '2020-12-02 12:29:34', '2020-12-04 06:29:34'),
+('005', '2020-12-03 07:29:58', '2020-12-05 06:16:58'),
+('006', '2020-12-08 06:30:27', '2020-12-09 04:30:27'),
+('007', '2020-12-02 12:30:49', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `taikhoan`
 --
 
@@ -791,8 +803,18 @@ INSERT INTO `taikhoan` (`tentaikhoan`, `matkhau`, `manv`, `trangthai`) VALUES
 CREATE TABLE `thexekhach` (
   `mathe` char(15) NOT NULL,
   `soxe` char(15) NOT NULL,
-  `loaixe` varchar(255) NOT NULL
+  `loaixe` varchar(255) NOT NULL,
+  `maxe` char(15) NOT NULL,
+  `trangthai` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `thexekhach`
+--
+
+INSERT INTO `thexekhach` (`mathe`, `soxe`, `loaixe`, `maxe`, `trangthai`) VALUES
+('01', '59A', 'tay ga ', '001', 'đã lấy '),
+('03', '13A', 'xe số', '003', 'đã lấy ');
 
 -- --------------------------------------------------------
 
@@ -804,21 +826,21 @@ CREATE TABLE `thexenv` (
   `mathe` char(15) NOT NULL,
   `manv` char(15) NOT NULL,
   `soxe` char(15) NOT NULL,
-  `loaixe` varchar(255) NOT NULL
+  `loaixe` varchar(255) NOT NULL,
+  `maxe` char(15) NOT NULL,
+  `trangthai` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Cấu trúc bảng cho bảng `traxe`
+-- Đang đổ dữ liệu cho bảng `thexenv`
 --
 
-CREATE TABLE `traxe` (
-  `maxera` char(15) NOT NULL,
-  `mathe` char(15) NOT NULL,
-  `ngaytra` date NOT NULL,
-  `giotra` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `thexenv` (`mathe`, `manv`, `soxe`, `loaixe`, `maxe`, `trangthai`) VALUES
+('02', 'BP2', '45H', 'ô tô', '002', 'đã lấy'),
+('04', 'BP4', '25K', 'tay ga ', '004', 'đã lấy '),
+('05', 'BV1', '59Y', 'xe số', '005', 'đã lấy '),
+('06', 'BV2', '12L', 'tay ga ', '006', 'đã lấy '),
+('07', 'GX1', '56T', 'ô tô', '007', 'chưa lấy');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -938,13 +960,6 @@ ALTER TABLE `nhanvien`
   ADD KEY `pk_nhanvien_chucvu` (`macv`);
 
 --
--- Chỉ mục cho bảng `nhanxe`
---
-ALTER TABLE `nhanxe`
-  ADD PRIMARY KEY (`maxevao`),
-  ADD KEY `fk_nhanxe_thexenv` (`mathe`);
-
---
 -- Chỉ mục cho bảng `phancong`
 --
 ALTER TABLE `phancong`
@@ -1006,6 +1021,12 @@ ALTER TABLE `phong`
   ADD KEY `FK_phong_loaiphong` (`maloaiph`);
 
 --
+-- Chỉ mục cho bảng `qlxe`
+--
+ALTER TABLE `qlxe`
+  ADD PRIMARY KEY (`maxe`);
+
+--
 -- Chỉ mục cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
@@ -1016,21 +1037,16 @@ ALTER TABLE `taikhoan`
 -- Chỉ mục cho bảng `thexekhach`
 --
 ALTER TABLE `thexekhach`
-  ADD PRIMARY KEY (`mathe`);
+  ADD PRIMARY KEY (`mathe`),
+  ADD KEY `maxe` (`maxe`);
 
 --
 -- Chỉ mục cho bảng `thexenv`
 --
 ALTER TABLE `thexenv`
   ADD PRIMARY KEY (`mathe`),
-  ADD KEY `fk_thexenv_nhanvien` (`manv`);
-
---
--- Chỉ mục cho bảng `traxe`
---
-ALTER TABLE `traxe`
-  ADD PRIMARY KEY (`maxera`),
-  ADD KEY `fk_traxe_thexenv` (`mathe`);
+  ADD KEY `fk_thexenv_nhanvien` (`manv`),
+  ADD KEY `maxe` (`maxe`);
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -1105,12 +1121,6 @@ ALTER TABLE `nhanvien`
   ADD CONSTRAINT `pk_nhanvien_chucvu` FOREIGN KEY (`macv`) REFERENCES `chucvu` (`macv`);
 
 --
--- Các ràng buộc cho bảng `nhanxe`
---
-ALTER TABLE `nhanxe`
-  ADD CONSTRAINT `fk_nhanxe_thexenv` FOREIGN KEY (`mathe`) REFERENCES `thexenv` (`mathe`);
-
---
 -- Các ràng buộc cho bảng `phancong`
 --
 ALTER TABLE `phancong`
@@ -1174,19 +1184,14 @@ ALTER TABLE `taikhoan`
 -- Các ràng buộc cho bảng `thexekhach`
 --
 ALTER TABLE `thexekhach`
-  ADD CONSTRAINT `thexekhach_ibfk_1` FOREIGN KEY (`mathe`) REFERENCES `khachhang` (`makh`);
+  ADD CONSTRAINT `thexekhach_ibfk_1` FOREIGN KEY (`maxe`) REFERENCES `qlxe` (`maxe`);
 
 --
 -- Các ràng buộc cho bảng `thexenv`
 --
 ALTER TABLE `thexenv`
-  ADD CONSTRAINT `fk_thexenv_nhanvien` FOREIGN KEY (`manv`) REFERENCES `nhanvien` (`manv`);
-
---
--- Các ràng buộc cho bảng `traxe`
---
-ALTER TABLE `traxe`
-  ADD CONSTRAINT `fk_traxe_thexenv` FOREIGN KEY (`mathe`) REFERENCES `thexenv` (`mathe`);
+  ADD CONSTRAINT `thexenv_ibfk_1` FOREIGN KEY (`maxe`) REFERENCES `qlxe` (`maxe`),
+  ADD CONSTRAINT `thexenv_ibfk_2` FOREIGN KEY (`manv`) REFERENCES `nhanvien` (`manv`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
