@@ -42,16 +42,17 @@ import javax.swing.SwingConstants;
 import javax.swing.event.MouseInputListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import KeToanGUI.TinhLuongPanel;
 
 public class TinhLuongGUI extends JPanel {
  //setbounds(x,y,width,length)
     int choice = 0;
 
     public static DefaultTableModel modelHD, modelCTHD;
-    JLabel lbtimkiem, lbtop, lbexit;
+    JLabel lbtimkiem, lbtop, lbexit, lbpanel;
     JTextField txtimkiem;
     JButton timkiem, thunho, exit;
-
+    TinhLuongPanel tl;
 
     Font font = new Font("Segoe UI", Font.BOLD, 18);
     Border border = BorderFactory.createLineBorder(new Color(33, 33, 33));
@@ -59,7 +60,6 @@ public class TinhLuongGUI extends JPanel {
     Border borderinput = BorderFactory.createLineBorder(new Color(30, 210, 96), 4);
 
     
-
     public TinhLuongGUI() {
 
         this.setSize(1350, 945);
@@ -163,12 +163,25 @@ public class TinhLuongGUI extends JPanel {
         
         //code tiếp giao diện ở đây
 
+        lbpanel = new JLabel();
+        lbpanel.setBounds(0, 0, 950, 880);
+        lbpanel.setBackground(Color.red);
         
-
+//        JPanel pn = new JPanel();
+//        pn.setBounds(0 , 0, 950, 880);
+//        pn.setBackground(Color.yellow);
+        
+        tl = new TinhLuongPanel();
+        tl.setBackground(Color.red);
+        
+//        pn.add(tl);        
+        lbpanel.add(tl);
         
         
     //----------**** add các thành phần giao diện ở dưới này ***--------
         this.add(lbtop);    
+        this.add(lbpanel);
+        
     }
 
 
