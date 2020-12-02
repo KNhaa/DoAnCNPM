@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 01, 2020 lúc 09:46 AM
+-- Thời gian đã tạo: Th12 01, 2020 lúc 06:43 AM
 -- Phiên bản máy phục vụ: 10.4.13-MariaDB
 -- Phiên bản PHP: 7.4.8
 
@@ -804,17 +804,16 @@ CREATE TABLE `thexekhach` (
   `mathe` char(15) NOT NULL,
   `soxe` char(15) NOT NULL,
   `loaixe` varchar(255) NOT NULL,
-  `maxe` char(15) NOT NULL,
-  `trangthai` text NOT NULL
+  `maxe` char(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `thexekhach`
 --
 
-INSERT INTO `thexekhach` (`mathe`, `soxe`, `loaixe`, `maxe`, `trangthai`) VALUES
-('01', '59A', 'tay ga ', '001', 'đã lấy '),
-('03', '13A', 'xe số', '003', 'đã lấy ');
+INSERT INTO `thexekhach` (`mathe`, `soxe`, `loaixe`, `maxe`) VALUES
+('01', '59A', 'tay ga ', '001'),
+('03', '13A', 'xe số', '003');
 
 -- --------------------------------------------------------
 
@@ -827,20 +826,19 @@ CREATE TABLE `thexenv` (
   `manv` char(15) NOT NULL,
   `soxe` char(15) NOT NULL,
   `loaixe` varchar(255) NOT NULL,
-  `maxe` char(15) NOT NULL,
-  `trangthai` text NOT NULL
+  `maxe` char(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `thexenv`
 --
 
-INSERT INTO `thexenv` (`mathe`, `manv`, `soxe`, `loaixe`, `maxe`, `trangthai`) VALUES
-('02', 'BP2', '45H', 'ô tô', '002', 'đã lấy'),
-('04', 'BP4', '25K', 'tay ga ', '004', 'đã lấy '),
-('05', 'BV1', '59Y', 'xe số', '005', 'đã lấy '),
-('06', 'BV2', '12L', 'tay ga ', '006', 'đã lấy '),
-('07', 'GX1', '56T', 'ô tô', '007', 'chưa lấy');
+INSERT INTO `thexenv` (`mathe`, `manv`, `soxe`, `loaixe`, `maxe`) VALUES
+('02', 'BP2', '45H', 'ô tô', '002'),
+('04', 'BP4', '25K', 'tay ga ', '004'),
+('05', 'BV1', '59Y', 'xe số', '005'),
+('06', 'BV2', '12L', 'tay ga ', '006'),
+('07', 'GX1', '56T', 'ô tô', '007');
 
 --
 -- Chỉ mục cho các bảng đã đổ
