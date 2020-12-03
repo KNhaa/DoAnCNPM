@@ -7,6 +7,7 @@ package KeToanGUI;
 
 
 
+import QuanLyGUI.CalamPanel;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import java.io.IOException;
@@ -163,16 +164,19 @@ public class TinhLuongGUI extends JPanel {
         
         
         //code tiếp giao diện ở đây
-        TinhLuongPanel tlpanel = new TinhLuongPanel();
-        tlpanel.setBounds(0, 0, 950, 880);
-        tlpanel.setBackground(Color.red);
-
-        
+        TinhLuongPanel tl = new TinhLuongPanel();
+        tl.setBounds(0, 0, 950, 880);
+        Panel pn = new Panel();
+        pn.setBounds(0, 0, 950, 880);
+//        JPanel pn = new JPanel();
+//        pn.setBounds(0, 0, 950, 880);
+//        pn.setBackground(Color.red);
         
     //----------**** add các thành phần giao diện ở dưới này ***--------
         
         this.add(lbtop);   
-        this.add(tlpanel);
+//        this.add(tlpanel);
+        this.add(pn);
     }
 
 
