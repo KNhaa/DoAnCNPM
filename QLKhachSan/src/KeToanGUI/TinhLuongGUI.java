@@ -49,7 +49,7 @@ public class TinhLuongGUI extends JPanel {
 
     public static DefaultTableModel modelHD, modelCTHD;
     JLabel lbtimkiem, lbtop, lbexit;
-    JTextField txtimkiem;
+    JTextField txtimkiem, tk;
     JButton timkiem, thunho, exit;
 
 
@@ -69,7 +69,7 @@ public class TinhLuongGUI extends JPanel {
 
 
         lbtop = new JLabel();
-        lbtop.setBounds(0, 0, 950, 65);
+        lbtop.setBounds(0, 0, 950, 945);
         lbtop.setBackground(new Color(134, 174, 195));
         lbtop.setOpaque(true);
         
@@ -154,7 +154,8 @@ public class TinhLuongGUI extends JPanel {
 
         });   
         
-  
+        
+   
         lbexit.add(exit);      
         lbtop.add(lbexit);
         lbtop.add(txtimkiem);
@@ -162,13 +163,25 @@ public class TinhLuongGUI extends JPanel {
         
         
         //code tiếp giao diện ở đây
-
+        tk = new JTextField(18);
+        tk.setFont(font);
+        tk.setBounds(70, 58, 250, 30);
+        tk.setBorder(border);
         
+        lbtop.add(tk);
+//        
+//        JLabel lbpanel = new JLabel();
+//        
+//        this.add(lbpanel);
+//        lbpanel.setBounds(0, 0, 950, 880);
+//        
+//        lbpanel.add(pn);
 
         
         
     //----------**** add các thành phần giao diện ở dưới này ***--------
         this.add(lbtop);    
+//        this.add(lbpanel);
     }
 
 
