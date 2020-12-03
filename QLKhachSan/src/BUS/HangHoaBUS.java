@@ -29,44 +29,7 @@ public class HangHoaBUS {
     }
     
     public boolean Them(HangHoaDTO sp) {
-//        if(sp.getMasach().equals(""))
-//        {
-//            JOptionPane.showMessageDialog(null, "Xin nhập mã SP");
-//            return false;
-//        }
-//        String regex = "^[0-9]{1,}$";
-//        if (sp.getMasach().matches(regex) == false) {
-//            JOptionPane.showMessageDialog(null,"Mã sách không hợp lệ");
-//            return false;
-//        }
-//        for (SachDTO x : dssp) {
-//            if (x.getMasach().equals(sp.getMasach())) {
-//                JOptionPane.showMessageDialog(null, "Mã sách bị trùng");
-//                return false;
-//            }
-//        }
-//        if(sp.getTensach().equals(""))
-//        {
-//            JOptionPane.showMessageDialog(null, "Xin nhập tên sách");
-//            return false;
-//        }
-//        if(sp.getMaloai().equals(""))
-//        {
-//            JOptionPane.showMessageDialog(null, "Xin chọn mã Loại");
-//            return false;
-//        }
-//        if(sp.getMancc().equals(""))
-//        {
-//            JOptionPane.showMessageDialog(null, "Xin chọn mã NCC");
-//            return false;
-//        }
-//              
-//        if(sp.getManxb().equals(""))
-//        {
-//            JOptionPane.showMessageDialog(null,"Xin chọn mã NXB");
-//            return false;
-//        }
-//        
+     
         if(sp.getMakho().equals(""))
         {
             JOptionPane.showMessageDialog(null,"Điền đầy đủ mã kho");
@@ -91,5 +54,47 @@ public class HangHoaBUS {
         }
         return sp;
          }
+         
+          public boolean Xoa(String ma) {
+        int index = -1;
+        if ("".equals(ma)) {
+            JOptionPane.showMessageDialog(null, "Mã sản phẩm không được để trống");
+            return false;
+        }
+        HangHoaDAO data = new HangHoaDAO();
+        data.Xoa(ma);
+        for (HangHoaDTO tempsp : HangHoaBUS.dssp)
+        {
+            index++;
+            if (tempsp.getMahang().equals(ma)) {
+                break;
+            }
+        }
+
+        dssp.remove(index);
+
+        JOptionPane.showMessageDialog(null, "Xóa thành công");
+        return true;
+    }
+    
+           public boolean Sua(HangHoaDTO sp)
+    {
+        
+        int index = -1; 
+        for(HangHoaDTO tempsp : HangHoaBUS.dssp)
+        {
+            index++;
+            if((tempsp.getMahang()).equals(sp.getMahang()))
+            {
+                   System.out.println(index);
+                break;
+            }
+        }
+        dssp.set(index, sp);
+        HangHoaDAO data = new HangHoaDAO();
+        data.Sua(sp);
+        JOptionPane.showMessageDialog(null, "Sửa thành công");
+        return true;
+    }
 
 }

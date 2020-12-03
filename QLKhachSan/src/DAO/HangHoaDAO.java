@@ -62,4 +62,33 @@ public class HangHoaDAO {
             System.out.println(ex.toString());
         }       
     }
+     public void Xoa(String ma)
+    {
+        try {
+            MySQLConnect connect = new MySQLConnect();
+            String qry = "DELETE FROM hanghoa";
+            qry +="  WHERE mahang='"+String.valueOf(ma)+"'";
+            connect.st = connect.conn.createStatement();
+            connect.st.executeUpdate(qry);
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+     public void Sua (HangHoaDTO sp)
+     {
+         try {
+            MySQLConnect connect = new MySQLConnect();
+            String qry = "UPDATE hanghoa SET ";
+            qry += "makho= '"+sp.getMakho()+"',";
+            qry += "tenhang='"+sp.getTenhang()+"',";
+            qry += "donvitinh='"+sp.getDonvitinh()+"',";
+            qry += "gia="+sp.getGia()+",";
+            qry +="soluong="+sp.getSoluong()+" ";
+            qry +="WHERE mahang='"+sp.getMahang()+"'";
+            connect.st = connect.conn.createStatement();
+            connect.st.executeUpdate(qry);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+     }
 }
