@@ -69,7 +69,7 @@ public class TinhLuongGUI extends JPanel {
 
 
         lbtop = new JLabel();
-        lbtop.setBounds(0, 0, 950, 945);
+        lbtop.setBounds(0, 0, 950, 65);
         lbtop.setBackground(new Color(134, 174, 195));
         lbtop.setOpaque(true);
         
@@ -163,25 +163,16 @@ public class TinhLuongGUI extends JPanel {
         
         
         //code tiếp giao diện ở đây
-        tk = new JTextField(18);
-        tk.setFont(font);
-        tk.setBounds(70, 58, 250, 30);
-        tk.setBorder(border);
-        
-        lbtop.add(tk);
-//        
-//        JLabel lbpanel = new JLabel();
-//        
-//        this.add(lbpanel);
-//        lbpanel.setBounds(0, 0, 950, 880);
-//        
-//        lbpanel.add(pn);
+        TinhLuongPanel tlpanel = new TinhLuongPanel();
+        tlpanel.setBounds(0, 0, 950, 880);
+        tlpanel.setBackground(Color.red);
 
         
         
     //----------**** add các thành phần giao diện ở dưới này ***--------
-        this.add(lbtop);    
-//        this.add(lbpanel);
+        
+        this.add(lbtop);   
+        this.add(tlpanel);
     }
 
 

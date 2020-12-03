@@ -187,6 +187,8 @@ public class CalamPanel extends javax.swing.JPanel {
 
     private void btnPhanCong1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhanCong1ActionPerformed
         // TODO add your handling code here:
+ 
+       
     }//GEN-LAST:event_btnPhanCong1ActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -196,7 +198,7 @@ public class CalamPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCaLam1;
-    private javax.swing.JButton btnPhanCong1;
+    public javax.swing.JButton btnPhanCong1;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;

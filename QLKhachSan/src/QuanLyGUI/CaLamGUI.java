@@ -164,10 +164,15 @@ public class CaLamGUI extends JPanel {
         CalamPanel cl = new CalamPanel();
         cl.setBounds(0, 0, 950, 880);
         
+        CalamPanel_1 cl1 = new CalamPanel_1();
+        cl1.setBounds(0, 0, 950, 880);
+        
+        
+        
     //----------**** add các thành phần giao diện ở dưới này ***--------
         
         this.add(lbtop);
-        this.add(cl);
+        this.add(cl1);
     }
 
 
