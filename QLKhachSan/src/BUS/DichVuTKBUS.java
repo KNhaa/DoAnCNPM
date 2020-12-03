@@ -23,5 +23,9 @@ public class DichVuTKBUS {
         }
         dsdv = data.docdsdichvu();
     }
+
+    public void docdsdichvu() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
