@@ -18,13 +18,14 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Image;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class NVGuiXeFrame extends JFrame {
 
     DefaultTableModel model;
-    JPanel pn1, pntop, pnleft, pnsanpham;
+    JPanel pn1, pntop, pnleft, pnsanpham,pndemo;
     JPanel pncontent;
     //lbhome, lbkhach, lbkhuyenmai, lbdichvu, lbtkloaiphong, lbtkdichvu, lbtkluong, lbtkdoanhthu
     //c1, c2, c3, c4, c5, c6, c7, c8
@@ -65,6 +66,8 @@ public class NVGuiXeFrame extends JFrame {
         pnleft.setBackground(color_background); //18,18,18( tím)
         pnleft.setLayout(null);
 
+        
+        
         ImageIcon imghome = new ImageIcon(getClass().getResource("/HinhAnh/hinhhome.png"));
         ImageIcon imghomef = new ImageIcon(getClass().getResource("/HinhAnh/hinhhomef.png"));
         ImageIcon imgsp = new ImageIcon(getClass().getResource("/HinhAnh/sanpham.png"));
@@ -311,14 +314,26 @@ public class NVGuiXeFrame extends JFrame {
             // KHÁCH HÀNG GUI
             @Override
             public void mouseClicked(MouseEvent e) {
-
-                BaiXeGUI baixeGUI = new BaiXeGUI();
-                pncontent.removeAll();                
-                pncontent.add(baixeGUI);               
-                pncontent.setBounds(250, 0, 950, 700);
+//                pndemo = new JPanel();
+//                pncontent.removeAll();
+//                pndemo.setBounds(0, 0, 500, 500);
+//                pndemo.setBackground(Color.BLACK);
+//                pncontent.add(pndemo);
+//                pncontent.repaint();
+                
+                BaiXeGUI baixeGUI = null;
+                try {
+                    baixeGUI = new BaiXeGUI();
+                } catch (SQLException ex) {
+                    Logger.getLogger(NVGuiXeFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                pncontent.removeAll();
+                pncontent.add(baixeGUI);
+                pncontent.setBounds(250,0 , 950, 700);
                 pncontent.repaint();
                 baixeGUI.revalidate();
-                baixeGUI.repaint();
+               baixeGUI.repaint();
+        
                       
                 c2.setBackground(color_part);               
                 c1.setBackground(color_background);
