@@ -24,7 +24,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Image;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 public class KeToanFrame extends JFrame {
 
     DefaultTableModel model;
@@ -469,6 +468,7 @@ public class KeToanFrame extends JFrame {
         pncontent.setBounds(250, 0, 950, 700);
         pncontent.setLayout(null);
         pncontent.setBorder(null);
+     
         //pncontent.add(new AdminHomeGUI()); // Giao diện chứa thông tin chung của nhân viên
         this.add(pncontent);
         this.repaint();

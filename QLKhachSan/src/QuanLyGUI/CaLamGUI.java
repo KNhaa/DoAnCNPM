@@ -47,7 +47,7 @@ public class CaLamGUI extends JPanel {
     int choice = 0;
 
     public static DefaultTableModel modelHD, modelCTHD;
-    JLabel lbtimkiem, lbtop, lbexit;
+    JLabel lbtimkiem, lbtop, lbexit, lbpanel;
     JTextField txtimkiem;
     JButton timkiem, thunho, exit;
 
@@ -161,13 +161,18 @@ public class CaLamGUI extends JPanel {
         
         
         //code tiếp giao diện ở đây
-
+        CalamPanel cl = new CalamPanel();
+        cl.setBounds(0, 0, 950, 880);
         
-
+        CalamPanel_1 cl1 = new CalamPanel_1();
+        cl1.setBounds(0, 0, 950, 880);
+        
         
         
     //----------**** add các thành phần giao diện ở dưới này ***--------
-        this.add(lbtop);    
+        
+        this.add(lbtop);
+        this.add(cl1);
     }
 
 
