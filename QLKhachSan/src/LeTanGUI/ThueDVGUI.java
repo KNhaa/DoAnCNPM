@@ -41,6 +41,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.MouseInputListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import LeTanGUI.DatDichVuGUI;
 
 public class ThueDVGUI extends JPanel {
  //setbounds(x,y,width,length)
@@ -162,18 +163,16 @@ public class ThueDVGUI extends JPanel {
   
         lbexit.add(exit);      
         lbtop.add(lbexit);
-        lbtop.add(txtimkiem);
-        lbtop.add(timkiem);
-        
         
         //code tiếp giao diện ở đây
-
-        
+        DatDichVuGUI datdv=new DatDichVuGUI();
+        datdv.setBounds(0,0,950,880);
 
         
         
     //----------**** add các thành phần giao diện ở dưới này ***--------
-        this.add(lbtop);    
+        this.add(datdv);
+        this.add(lbtop);
     }
 
 
