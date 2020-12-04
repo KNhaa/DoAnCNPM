@@ -24,11 +24,9 @@ public class PhongTrongBUS {
     public void readAvailableRoom(String datefrom, String dateto)
     {
         PhongTrongDAO data = new PhongTrongDAO();
-        if(dsphongtrong==null)
-        {
-            dsphongtrong = new ArrayList<PhongTrongDTO>();
-            dsphongtrong=data.docDSPhongTrong(datefrom, dateto);           
-        }
+        if(dsphongtrong==null)        
+            dsphongtrong = new ArrayList<PhongTrongDTO>();                            
+        dsphongtrong=data.docDSPhongTrong(datefrom, dateto); 
     }
     
 }

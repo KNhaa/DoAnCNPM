@@ -5,16 +5,6 @@
  */
 package MainFrame;
 
-
-//import AdminGUI.AdminHomeGUI;
-//import AdminGUI.HoaDonGUI;
-//import AdminGUI.KhachHangGUI;
-//import AdminGUI.NhanVienGUI;
-//import AdminGUI.PhieuNhapGUI;
-//import AdminGUI.SachGUI;
-//import AdminGUI.TacGiaGUI;
-//import AdminGUI.TaiKhoanGUI;
-//import ThongKeGUI.ThongKeAGUI;
 import LeTanGUI.DatPhongGUI;
 import LeTanGUI.HuyDatPhongGUI;
 import LeTanGUI.ThanhToanGUI;
@@ -411,13 +401,6 @@ public class LeTanFrame extends JFrame {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-//                KhachHangGUI khGUI = new KhachHangGUI();
-//                pncontent.removeAll();
-//                pncontent.add(khGUI);
-//                pncontent.setBounds(250, 0, 1350, 945);
-//                pncontent.repaint();
-//                khGUI.revalidate();
-//                khGUI.repaint();
 
                 c3.setBackground(color_part);
                 c2.setBackground(color_background);
@@ -483,7 +466,7 @@ public class LeTanFrame extends JFrame {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                HuyDatPhongGUI huydatGUI = new HuyDatPhongGUI();
+                HuyDatPhongGUI huydatGUI = new HuyDatPhongGUI("LT1");
                 pncontent.removeAll();
                 pncontent.add(huydatGUI);
                 pncontent.setBounds(250, 0, 1350, 945);
@@ -803,17 +786,6 @@ public class LeTanFrame extends JFrame {
     }
     
     public static void main(String[] args) {
-//        try {
-//            UIManager.setLookAndFeel( "com.seaglasslookandfeel.SeaGlassLookAndFeel" );
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(GiaoDienManager.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            Logger.getLogger(GiaoDienManager.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            Logger.getLogger(GiaoDienManager.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (UnsupportedLookAndFeelException ex) {
-//            Logger.getLogger(GiaoDienManager.class.getName()).log(Level.SEVERE, null, ex);
-//        }
         LeTanFrame test = new LeTanFrame();
             test.ShowBang();
     }

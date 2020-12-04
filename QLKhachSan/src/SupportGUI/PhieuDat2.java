@@ -21,8 +21,11 @@ package SupportGUI;
 //import DAO.HoaDonDAO;
 //import DTO.SachDTO;
 //import EmployeeGUI.BanHangGUI;
+import BUS.CTDatPhongBUS;
 import BUS.PDatPhongBUS;
 import DTO.CTDatPhongDTO;
+import DTO.PDatPhongDTO;
+import LeTanGUI.DatPhongGUI;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import java.awt.*;
@@ -35,6 +38,9 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -62,6 +68,7 @@ public class PhieuDat2 extends JFrame{
     public static int tongtien = 0;
     public static int soluongtong = 0;
     public static int thanhtien = 0;
+    public static int tiencoc = 0;
     int change = 0; //Tắt đóng mã hóa đơn
     //thuộc tính chi tiết hóa đơn
     JLabel lbmasp, lbten, lbdongia, lbsoluong, lbsoluongmacdinh;
@@ -77,7 +84,7 @@ public class PhieuDat2 extends JFrame{
     Border bordernull = BorderFactory.createEmptyBorder();
 
 //    CTHDBUS bus = new CTHDBUS();
-//     ArrayList<CTHDDTO> list=new ArrayList<>();
+     ArrayList<CTDatPhongDTO> list=new ArrayList<>();
 
     public PhieuDat2() {
         this.setUndecorated(true);
@@ -359,13 +366,6 @@ public class PhieuDat2 extends JFrame{
         txmasp.setBounds(100, 35, 60, 30);
         txmasp.setFont(fontinput);
 
-//        lbten = new JLabel("Tên : ");
-//        lbten.setBounds(200, 40, 50, 18);
-//        lbten.setFont(font);
-//        txten = new JTextField();
-//        txten.setEditable(false);
-//        txten.setBounds(250, 35, 200, 30);
-//        txten.setFont(fontinput);
 
         lbdongia = new JLabel("Đơn giá : ");
         lbdongia.setBounds(470, 40, 100, 25);
@@ -375,13 +375,13 @@ public class PhieuDat2 extends JFrame{
         txdongia.setBounds(550, 35, 100, 30);
         txdongia.setFont(fontinput);
 
-//        lbsoluong = new JLabel("SL : ");
-//        lbsoluong.setBounds(670, 40, 50, 18);
-//        lbsoluong.setFont(font);
-//        txsoluong = new JTextField();
-//        txsoluong.setBounds(700, 35, 50, 30);
-//        txsoluong.setFont(fontinput);
-
+        lbsoluong = new JLabel("SL : ");
+        lbsoluong.setBounds(670, 40, 50, 18);
+        lbsoluong.setFont(font);
+        txsoluong = new JTextField();
+        txsoluong.setBounds(700, 35, 50, 30);
+        txsoluong.setFont(fontinput);
+ 
         //chonsp = new JButton("...");
         chonsp = new JButton("Tìm phòng");
         //chonsp.setBounds(760, 35, 40, 30);
@@ -400,32 +400,14 @@ public class PhieuDat2 extends JFrame{
         xoa.setBounds(120, 80, 90, 40);
         xoa.setFont(fontBut);
         
-//        sua = new JButton("Sửa");
-//        sua.setForeground(new Color(255, 255, 255));
-//        sua.setBackground(new Color(30, 215, 96));
-//        sua.setBounds(220, 80, 90, 40);
-//        sua.setFont(fontBut);
 
         reset = new JButton("Reset");
         reset.setForeground(new Color(255, 255, 255));
         reset.setBackground(new Color(30, 215, 96));
         reset.setBounds(220, 80, 90, 40);
         reset.setFont(fontBut);
-//        lbsoluongmacdinh = new JLabel("SL mặc định : ");
-//        lbsoluongmacdinh.setBounds(433, 80, 150, 40);
-//        lbsoluongmacdinh.setFont(font);
-//        txsoluongmacdinh = new JTextField();
-//        txsoluongmacdinh.setBounds(550, 85, 50, 30);
-//        txsoluongmacdinh.setFont(fontinput);
-//        txsoluongmacdinh.setEditable(false);
 
         Vector header = new Vector();
-//        header.add("Mã HĐ");
-//        header.add("Mã SP");
-//        header.add("Đơn giá");
-//        header.add("Số lượng");
-//        header.add("SL mặc định");
-        
         header.add("Mã đặt");
         header.add("Mã phòng");
         header.add("Đơn giá");
@@ -443,14 +425,10 @@ public class PhieuDat2 extends JFrame{
 
         pncthd.add(lbmasp);
         pncthd.add(txmasp);
-        //pncthd.add(lbten);
-        //pncthd.add(txten);
         pncthd.add(lbdongia);
         pncthd.add(txdongia);
-        //pncthd.add(lbsoluong);
-        //pncthd.add(txsoluong);
-        //pncthd.add(lbsoluongmacdinh);
-        //pncthd.add(txsoluongmacdinh);
+        pncthd.add(lbsoluong);
+        pncthd.add(txsoluong);
         pncthd.add(chonsp);
         pncthd.add(them);
         pncthd.add(xoa);
@@ -510,17 +488,7 @@ public class PhieuDat2 extends JFrame{
         Date date = new Date();
         SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
         txngaymua.setText(fm.format(date));
-        donghd.addActionListener((ActionEvent e) -> {
 
-            if (change == 0) {
-                change = 1;
-                txmahd.setEditable(false);
-            } else {
-                change = 0;
-                txmahd.setEditable(true);
-            }
-
-        });
         chonkh.addActionListener((ActionEvent e) -> {
             SupportKhachHang duyetkh = new SupportKhachHang("PhieuDatPhong");
 
@@ -536,117 +504,96 @@ public class PhieuDat2 extends JFrame{
             }
             else
             {
-                TimPhongGUI duyetsp = new TimPhongGUI(ngayden,ngaydi);
+                PDatPhongBUS pdbus = new PDatPhongBUS();
+                Long diffday1= pdbus.diffdays(txngaymua.getText(), txngayden.getText());
+                Long diffday2= pdbus.diffdays(txngayden.getText(), txngaydi.getText());
+                if(diffday1<0)
+                {
+                    JOptionPane.showMessageDialog(rootPane, "Ngày nhận phòng phải lớn hơn hoặc bằng ngày đặt phòng");
+                    return;
+                }
+                if(diffday2<1)
+                {
+                    JOptionPane.showMessageDialog(rootPane, "Ngày trả phòng phải lớn hơn ngày nhận phòng");
+                    return;
+                }               
+                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate date1= LocalDate.parse(ngayden, format);
+                LocalDate date2= LocalDate.parse(ngaydi, format);
+                Long daysBetween = ChronoUnit.DAYS.between(date1, date2);
+                
+                txsoluong.setText(String.valueOf(daysBetween));
+        
+                TimPhongGUI duyetsp = new TimPhongGUI(txngayden.getText(),txngaydi.getText());
+                
             }
             
 
         });
-//        chonkm.addActionListener((ActionEvent e) -> {
-//            try {
-//                SupportKhuyenMai duyetkm = new SupportKhuyenMai("ThemHoaDon");
-//                   
-//            } catch (ParseException ex) {
-//                Logger.getLogger(SupportHoaDon.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        });
-        //THÊM CTHD
+
        them.addActionListener((ActionEvent e) -> {
 
-//                if ("".equals(txmahd.getText())) {
-//                    JOptionPane.showMessageDialog(null, "Nhập mã HĐ để có thể bắt đầu thêm");
-//                } else if ("".equals(txmasp.getText())) {
-//                    JOptionPane.showMessageDialog(null, "Chọn thông tin sản phẩm cần bán");
-//                } else if ("".equals(txsoluong.getText())) {
-//                    JOptionPane.showMessageDialog(null, "Nhập số lượng sản phẩm cần bán");
-//                } else if (txmahd.isEditable() == true) {
-//                    JOptionPane.showMessageDialog(null, "Đóng mã HĐ rồi mới nhập chi tiết");
-//                } else 
-//                  
-//               {
-//                    String pattern ="^[0-9]{1,}$";
-//                if(txsoluong.getText().matches(pattern)==false)
-//                {
-//                    JOptionPane.showMessageDialog(null, "Chỉ được nhập số"); 
-//                    return;
-//                }
-//                // thêm chi tiết hóa đơn
-//                CTHDDTO cthd = new CTHDDTO();
-//                cthd.setMahd(txmahd.getText());
-//                cthd.setMasach(txmasp.getText());
-//                cthd.setSoluong(Integer.valueOf(txsoluong.getText()));
-//                cthd.setThanhtien(Integer.valueOf(txdongia.getText()));
+                if ("".equals(txmahd.getText())) {
+                    JOptionPane.showMessageDialog(null, "Nhập mã PĐ để có thể bắt đầu thêm");
+                } else if ("".equals(txmasp.getText())) {
+                    JOptionPane.showMessageDialog(null, "Chọn phòng cần đặt");
+                }  else 
+                  
+               {
                 CTDatPhongDTO ctdp= new CTDatPhongDTO();
                 ctdp.setMadat(txmahd.getText());
                 ctdp.setMaphong(txmasp.getText());
                 ctdp.setDongia(Integer.valueOf(txdongia.getText()));
-//                if (cthd.getSoluong() <= Integer.valueOf(txsoluongmacdinh.getText()))
-//                {
-//             
-//                    if(list.isEmpty())
-//                    {
-//                        list.add(cthd);
-//                               Vector row = new Vector();
-//                               row.add(cthd.getMahd());
-//                               row.add(cthd.getMasach());
-//                               row.add(cthd.getThanhtien());
-//                               row.add(cthd.getSoluong());
-//                               row.add(txsoluongmacdinh.getText());
-//                               model.addRow(row);
-//                               table.setModel(model);
-//                               tongtien += cthd.getThanhtien()*cthd.getSoluong();
-//                               soluongtong += cthd.getSoluong();
-//                               txsoluongtong.setText(String.valueOf(soluongtong));
-//                            txtongtien.setText(String.valueOf(tongtien));
-//                            txthanhtien.setText(Chuyentien(String.valueOf(tongtien)));
-//                        KhuyenMaiBUS buskm = new KhuyenMaiBUS();
-//                        buskm.docDSKMD();
-//                        
-//                    }
-//                    else
-//                    {
-//                        int trung=0;
-//                    for (int i=0; i<list.size(); i++)
-//                    {
-//                    CTHDDTO tempctpn = new CTHDDTO();
-//                    tempctpn = list.get(i);
-//                        if(tempctpn.getMasach().equals(cthd.getMasach()))
-//                        {
-//                            JOptionPane.showMessageDialog(null, "Mã sách bị trùng");
-//                            trung=1;
-//                            break;
-//                        }
-//                    }
-//                    if(trung==0)
-//                    {
-//                         list.add(cthd);
-//                        //JOptionPane.showMessageDialog(null, "mã sách vào mảng: "+cthd.getMasach());
-//                              Vector row = new Vector();
-//                               row.add(cthd.getMahd());
-//                               row.add(cthd.getMasach());
-//                               row.add(cthd.getThanhtien());
-//                               row.add(cthd.getSoluong());
-//                               row.add(txsoluongmacdinh.getText());
-//                               model.addRow(row);
-//                               table.setModel(model);
-//
-//                               tongtien += cthd.getSoluong() * cthd.getThanhtien();
-//                                soluongtong += cthd.getSoluong();
-//                                txtongtien.setText(String.valueOf(tongtien));
-//                               
-//                               txsoluongtong.setText(String.valueOf(soluongtong));
-//                               txthanhtien.setText(Chuyentien(String.valueOf(tongtien)));
-//                    }
-//                    
-//                    
-//                    }
-//                
-//                }
-//                                    else
-//                    {
-//                        JOptionPane.showMessageDialog(null, "Số lượng trong CTHĐ phải nhỏ hơn SL mặc định");
-//                        txsoluong.requestFocus();
-//                    }
-//               }
+
+                    if(list.isEmpty())
+                    {
+                        list.add(ctdp);
+                               Vector row = new Vector();
+                               row.add(ctdp.getMadat());
+                               row.add(ctdp.getMaphong());
+                               row.add(ctdp.getDongia());
+                               model.addRow(row);
+                               table.setModel(model);                              
+                               tongtien += ctdp.getDongia()*(Integer.valueOf(txsoluong.getText()));
+                               tiencoc=(int) (tongtien*0.5);
+                               txtongtien.setText(String.valueOf(tongtien));
+                               txthanhtien.setText(String.valueOf(tiencoc));
+                    }
+                    else
+                    {
+                        int trung=0;
+                    for (int i=0; i<list.size(); i++)
+                    {
+                    CTDatPhongDTO tempctpn = new CTDatPhongDTO();
+                    tempctpn = list.get(i);
+                        if(tempctpn.getMaphong().equals(ctdp.getMaphong()))
+                        {
+                            JOptionPane.showMessageDialog(null, "Mã phòng bị trùng");
+                            trung=1;
+                            break;
+                        }
+                    }
+                    if(trung==0)
+                    {
+                         list.add(ctdp);
+                        //JOptionPane.showMessageDialog(null, "mã sách vào mảng: "+cthd.getMasach());
+                              Vector row = new Vector();
+                              row.add(ctdp.getMadat());
+                              row.add(ctdp.getMaphong());
+                              row.add(ctdp.getDongia());
+                               model.addRow(row);
+                               table.setModel(model);
+
+                               tongtien += ctdp.getDongia()*(Integer.valueOf(txsoluong.getText()));
+                               tiencoc=(int) (tongtien*0.5);
+                               txtongtien.setText(String.valueOf(tongtien));                              
+                               txthanhtien.setText(String.valueOf(tiencoc));
+                                                            
+                    }                    
+                    
+                    }
+               }
+               
        }); 
   
 
@@ -654,48 +601,31 @@ public class PhieuDat2 extends JFrame{
 
 
        // XÓA CTHD
-//        xoa.addActionListener((ActionEvent e) -> {
-//            int i = table.getSelectedRow();
-//            if (i >= 0) {
-//               
-//               CTHDDTO cthd = new CTHDDTO();
-//               cthd.setMahd(txmahd.getText());
-//               cthd.setMasach(String.valueOf(model.getValueAt(i, 1)));
-//               cthd.setSoluong(Integer.parseInt(model.getValueAt(i,3).toString()));
-//               cthd.setThanhtien(Integer.valueOf(model.getValueAt(i, 2).toString()));
-//                    //remove nè
-//                       for(int j=0; j<list.size(); j++)
-//                {
-//                    CTHDDTO temp = new CTHDDTO();
-//                    temp = list.get(j);
-//                    if(temp.getMasach().equals(cthd.getMasach()))
-//                    {
-//                        list.remove(j);
-//                        tongtien -= cthd.getSoluong() * cthd.getThanhtien();
-//                    soluongtong -= cthd.getSoluong();
-//                    thanhtien = tongtien;
-//
-//                
-//                 txtongtien.setText(String.valueOf(tongtien));
-//                txsoluongtong.setText(String.valueOf(soluongtong));
-//                txthanhtien.setText(Chuyentien(String.valueOf(thanhtien)));
-//                        break;
-//                    }                   
-//                }      
-//                        
-//                model.removeRow(i);
-//                table.setModel(model);
-//
-//   
-//
-//                txmasp.setText("");
-//                txten.setText("");
-//                txdongia.setText("");
-//                txsoluong.setText("");
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Chọn dòng để xóa");
-//            }
-//        });
+        xoa.addActionListener((ActionEvent e) -> {
+            int i = table.getSelectedRow();
+            if (i >= 0) {
+               
+               CTDatPhongDTO ctdp = new CTDatPhongDTO();               
+               ctdp.setMadat(txmahd.getText());
+               ctdp.setMaphong(String.valueOf(model.getValueAt(i,1).toString()));
+               ctdp.setDongia(Integer.valueOf(model.getValueAt(i,2).toString()));
+               JOptionPane.showMessageDialog(rootPane, ctdp.getMaphong()+"-"+i);
+            
+               list.remove(i);              
+               tongtien -=ctdp.getDongia()*Integer.valueOf(txsoluong.getText());
+               tiencoc=(int) (tongtien*0.5);
+               txtongtien.setText(String.valueOf(tongtien));
+               txthanhtien.setText(String.valueOf(tiencoc));
+                        
+                model.removeRow(i);
+                table.setModel(model);
+
+                txmasp.setText("");
+                txdongia.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Chọn dòng để xóa");
+            }
+        });
 
        
        //XÁC NHẬN LẬP HÓA ĐƠN
@@ -710,9 +640,6 @@ public class PhieuDat2 extends JFrame{
             } else if ("".equals(txmakh.getText())) {
                 chuyendoi = 0;
                 JOptionPane.showMessageDialog(null, "Mã khách hàng không được trống");
-            } else if ("".equals(txtidluutru.getText())) {
-                chuyendoi = 0;
-                JOptionPane.showMessageDialog(null, "Mã khuyến mãi không được trống");
             } else if (model.getRowCount() == 0) {
                 chuyendoi = 0;
                 JOptionPane.showMessageDialog(null, "Cần có thông tin trong bảng chi tiết");
@@ -722,64 +649,64 @@ public class PhieuDat2 extends JFrame{
                 int output = JOptionPane.showConfirmDialog(null, "Có chắc muốn tạo hóa đơn này", "", JOptionPane.YES_NO_OPTION);
                 if (output == JOptionPane.YES_OPTION) 
                 {
-//                    HoaDonDTO hd = new HoaDonDTO();
-//                    hd.setMahd(txmahd.getText());
-//                    hd.setNgaylaphd(txngaymua.getText());                   
-//
-//                    hd.setMakm(txtidluutru.getText());
-//                    hd.setManv(txmanv.getText());
-//                    hd.setMakh(txmakh.getText());
-//                    hd.setTongtien(Integer.valueOf(txtongtien.getText()));
-
-//                    try {
-//                        hd.setThuctra(Integer.valueOf(Chuyenint(txthanhtien.getText())));
-//                    } catch (ParseException ex) {
-//                        Logger.getLogger(SupportHoaDon.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//                    hd.setTienkm((hd.getTongtien()) - (hd.getThuctra()));
+                    PDatPhongBUS pdbus = new PDatPhongBUS();
                     
-//                    HoaDonBUS bus = new HoaDonBUS();
-//                    if (HoaDonBUS.dshd == null) 
-//                    {
-//                        bus.docDSHD();
-//                    }
-//                    bus.ThemHD(hd);
+                    
+                    PDatPhongDTO pd = new PDatPhongDTO();
+                    pd.setMadat(txmahd.getText());
+                    pd.setMakhdat(txmakh.getText());
+                    pd.setManv(txmanv.getText());
+                    pd.setCmndnguoiluutru(txtidluutru.getText());
+                    pd.setTennguoiluutru(txttenluutru.getText());
+                    pd.setNgaydatphong(txngaymua.getText());
+                    pd.setNgayden(txngayden.getText());
+                    pd.setNgaydi(txngaydi.getText());
+                    pd.setTienphong(Integer.parseInt(txtongtien.getText()));
+                    Long daysbetween = pdbus.diffdays(txngaymua.getText(), txngayden.getText());
+                    if(daysbetween>=1)
+                    {
+                        pd.setTrangthai("Chờ nhận phòng");
+                        pd.setTiencoc(Integer.parseInt(txthanhtien.getText()));
+                    }                     
+                    else
+                    {
+                        pd.setTrangthai("Đã nhận phòng");
+                        pd.setTiencoc(0);
+                    }
+                        
+
+                    
+                    if(PDatPhongBUS.dspdphong==null)
+                    {
+                        pdbus.docDSPDPhong();
+                    }
+                    pdbus.themPD(pd);
                     
                      //Thêm HĐ vào bảng GUI
                     Vector row = new Vector();
+                    row.add(pd.getMadat());
+                    row.add(pd.getManv());
+                    row.add(pd.getManv());
+                    row.add(pd.getNgaydatphong());
+                    row.add(pd.getNgayden());
+                    row.add(pd.getNgaydi());
+                    row.add(pd.getCmndnguoiluutru());
+                    row.add(pd.getTennguoiluutru());
+                    row.add(pd.getTienphong());
+                    row.add(pd.getTiencoc());
+                    row.add(pd.getTrangthai());
 
-//                    row.add(hd.getMahd());
-//                    row.add(hd.getMakm());
-//                    row.add(hd.getManv());
-//                    row.add(hd.getMakh());
-//                   
-//                    row.add(hd.getNgaylaphd());
-//                    row.add(hd.getTongtien());
-//                    row.add(Integer.valueOf(hd.getTongtien()) - Integer.valueOf(hd.getThuctra()));
-//                    row.add(hd.getThuctra());
-                    
-                  
-                    
-                    
-                    // them CTHD
-//                    CTHDDTO ct=new CTHDDTO();
-//                    CTHDBUS busct=new CTHDBUS();
-
-//                    for(int i=0; i<list.size();i++)
-//                    {
-//                        ct=list.get(i);
-//                        busct.ThemCTHDtheoHD(ct);
-//                       
-//                    }
-                   
-                    
-                    if (id.equals("Manager")) {
-//                        HoaDonGUI.modelHD.addRow(row);
-//                        HoaDonGUI.tableHD.setModel(HoaDonGUI.modelHD);
-                    } else {
-//                        BanHangGUI.modelHD.addRow(row);
-//                        BanHangGUI.tableHD.setModel(BanHangGUI.modelHD);
+                    CTDatPhongBUS ctdpbus = new CTDatPhongBUS();
+                    CTDatPhongDTO ctdp = new CTDatPhongDTO();
+                    for(int i=0; i<list.size(); i++)
+                    {                      
+                        ctdp=list.get(i);
+                        ctdpbus.themCTDP(ctdp);
                     }
+                    DatPhongGUI.modelHD.addRow(row);
+                    DatPhongGUI.tableHD.setModel(DatPhongGUI.modelHD);
+                    tongtien=0;
+                    tiencoc=0;
                    
                     this.setVisible(false);
                     
@@ -787,15 +714,10 @@ public class PhieuDat2 extends JFrame{
                 } else 
                     if (output == JOptionPane.NO_OPTION) 
                     {
-                    change = 0;
-                    txmahd.setEditable(true);
+                    //change = 0;
+                    //txmahd.setEditable(true);
                 }
-//              for(int i=0; i<list.size();i++)
-//                    {
-//                        list.remove(i);
-//                       
-//                    }
-              tongtien=0;
+
              
               
             }
@@ -810,6 +732,7 @@ public class PhieuDat2 extends JFrame{
                     this.setVisible(false);
                 }
                 tongtien=0;
+                tiencoc=0;
             }
 
         });
@@ -821,22 +744,13 @@ public class PhieuDat2 extends JFrame{
            txtongtien.setText("");
            txthanhtien.setText("");
            tongtien=0;
-//           list.clear();
+           tiencoc=0;
+           list.clear();
            model.setNumRows(0);
            table.setModel(model);
         });
     
-}
-//     public static void main(String[] args) {
-//        SupportHoaDon test = new SupportHoaDon();
-//        test.setView("Manager");
-//       
-//     }
-    
-    public static void main(String[] args) {
-        PhieuDat2 test = new PhieuDat2();
-        test.setView("LT2");      
-     }       
+}     
 }
 
 

@@ -12,7 +12,11 @@ import java.util.ArrayList;
  *
  * @author DELL
  */
-public class PhongTrongDAO {   
+public class PhongTrongDAO {
+    public PhongTrongDAO()
+    {
+        
+    }
     public ArrayList docDSPhongTrong(String ngayden, String ngaydi)
     {
         ArrayList<PhongTrongDTO> ds = new ArrayList<PhongTrongDTO>();
@@ -39,11 +43,30 @@ public class PhongTrongDAO {
 //      )
 //group by maphong
 //)
-            String query="select phong.maphong, phong.maloaiph, tang, loaiphong.dongia, phong.mota\n" +
-"from phong, loaiphong \n" +
-"where phong.maloaiph=loaiphong.maloaiph";
+
+                
+            String timphong="select phong.maphong, phong.maloaiph, phong.tang, loaiphong.dongia, phong.mota\n" +
+"from phong, loaiphong\n" +
+"where phong.maloaiph=loaiphong.maloaiph\n" +
+"and phong.maphong not IN\n" +
+"(\n" +
+"select maphong\n" +
+"from phieudatphong, ctdat\n" +
+"where phieudatphong.madat=ctdat.madat\n" +
+"and phieudatphong.trangthai not like N'Da huy'\n" +
+"and ( (phieudatphong.ngayden <= '"+ngayden+"' and phieudatphong.ngaydi >='"+ngayden+"')\n" +
+"     or(phieudatphong.ngayden < '"+ngaydi+"' and phieudatphong.ngaydi >= '"+ngaydi+"')\n" +
+"     or('"+ngayden+"'<=phieudatphong.ngayden and '"+ngaydi+"'>=phieudatphong.ngayden))\n" +
+"     and phieudatphong.madat not IN\n" +
+"     (\n" +
+"       select phieudatphong.madat\n" +
+"	FROM phieudatphong, hoadon\n" +
+"	where phieudatphong.madat=hoadon.madat  \n" +
+"      )\n" +
+"group by maphong\n" +
+")";          
             connect.st=connect.conn.createStatement();
-            connect.rs=connect.st.executeQuery(query);
+            connect.rs=connect.st.executeQuery(timphong);
             
             while(connect.rs.next())
             {
@@ -63,5 +86,5 @@ public class PhongTrongDAO {
         }
         connect.MySQLDisconnect();
         return ds;
-    }
+    }        
 }

@@ -9,6 +9,7 @@ import BUS.CTDatPhongBUS;
 import BUS.PDatPhongBUS;
 import DTO.CTDatPhongDTO;
 import DTO.PDatPhongDTO;
+import SupportGUI.PhieuDat2;
 import SupportGUI.PhieuDatPhongGUI;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
@@ -51,11 +52,10 @@ public class DatPhongGUI extends JPanel {
     int choice = 0;
 
     public static DefaultTableModel modelHD, modelCTHD;
-    JLabel lbmahd, lbmakh, lbmanv, lbngaymua, lbtongtien, lbtimkiem, lbsoluong, lbdongia, lbmasp, lbmakm, lbthanhtien, lbmacthd;
-    JTextField txmahd, txmakh, txmanv, txngaymua, txtongtien, txtimkiem, txsoluong, txdongia, txmasp, txmakm, txthanhtien, txmacthd;
+    JLabel lbmahd, lbmakh, lbmanv, lbngaymua, lbtongtien, lbtimkiem, lbsoluong, lbdongia, lbmasp, lbthanhtien, lbmacthd;
+    JTextField txmahd, txmakh, txmanv, txngaymua, txtongtien, txtimkiem, txsoluong, txdongia, txmasp, txthanhtien, txmacthd;
     JButton them, xoa, sua, reset, timkiem, chonmakh, chonmanv, chonmasp, chonmakm, next, preview, thunho, exit, inan;
     public static JTable tableHD, tableCTHD;
-    //JTable tableHD, tableCTHD;
     JLabel lbhd, lbcthd, lbtop, lbexit, lbinfopbh;
     JComboBox cb;
     JPanel hd, cthd;
@@ -109,138 +109,11 @@ public class DatPhongGUI extends JPanel {
                 while (modelHD.getRowCount() > 0) {
                     modelHD.removeRow(0);
                 }
-//                for (HoaDonDTO hd : HoaDonBUS.dshd) {
-//                    Vector row = new Vector();
-//                    row.add(hd.getMahd());
-//                     row.add(hd.getMakm());
-//                    row.add(hd.getManv());
-//                    row.add(hd.getMakh());
-//                    row.add(hd.getNgaylaphd());
-//                    row.add(hd.getTongtien());
-//                    row.add(hd.getTienkm());
-//                    row.add(hd.getThuctra());
-//                   
-//
-//                    //row.add(Chuyentien(String.valueOf(hd.getTongtien())));
-//                    // row.add(Chuyentien(String.valueOf(hd.getThanhtien())));
-//                    modelHD.addRow(row);
-//                }
                 tableHD.setModel(modelHD);
             }
         });
         lbtop.add(back);
-//
-//        lbtknc = new JLabel();
-//        lbtknc.setBounds(340, 65, 450, 215);
-//        lbtknc.setBackground(new Color(100, 100, 100));
-//        lbtknc.setOpaque(true);
-//        this.add(lbtknc);
-
-//        txgiatu = new JTextField();
-//        txgiatu.setText("Giá từ...");
-//        txgiatu.setFont(fonttknc);
-//        txgiatu.setBounds(20, 20, 150, 40);
-//        txgiatu.setBorder(border);
-//        txgiatu.addFocusListener(new FocusListener() {
-//            @Override
-//            public void focusGained(FocusEvent e) {
-//                txgiatu.setBorder(borderinput);
-//                if (txgiatu.getText().equals("Giá từ...")) {
-//                    txgiatu.setText("");
-//                }
-//            }
-//
-//            @Override
-//            public void focusLost(FocusEvent e) {
-//                txgiatu.setBorder(border);
-//                if (txgiatu.getText().equals("")) {
-//                    txgiatu.setText("Giá từ...");
-//                }
-//            }
-//        });
-
-//        txgiaden = new JTextField();
-//        txgiaden.setText("Giá đến...");
-//        txgiaden.setFont(fonttknc);
-//        txgiaden.setBounds(220, 20, 150, 40);
-//        txgiaden.setBorder(border);
-//        txgiaden.addFocusListener(new FocusListener() {
-//            @Override
-//            public void focusGained(FocusEvent e) {
-//                txgiaden.setBorder(borderinput);
-//                if (txgiaden.getText().equals("Giá đến...")) {
-//                    txgiaden.setText("");
-//                }
-//            }
-//
-//            @Override
-//            public void focusLost(FocusEvent e) {
-//                txgiaden.setBorder(border);
-//                if (txgiaden.getText().equals("")) {
-//                    txgiaden.setText("Giá đến...");
-//                }
-//            }
-//        });
-
-//        ImageIcon hinhmuiten = new ImageIcon(getClass().getResource("/HinhAnh/muiten.png"));
-//        muiten = new JLabel();
-//        muiten.setIcon(hinhmuiten);
-//        muiten.setFont(fonttknc);
-//        muiten.setBounds(180, 25, 40, 30);
-//        muiten.setBorder(bordernull);
-//        muiten.setFocusTraversalKeysEnabled(false);
-//        muiten.setForeground(new Color(255, 255, 255));
-
-//        lbtknc.add(txgiatu);
-//        lbtknc.add(muiten);
-//        lbtknc.add(txgiaden);
-//
-//        txsltu = new JTextField();
-//        txsltu.setText("Số Lượng từ...");
-//        txsltu.setFont(fonttknc);
-//        txsltu.setBounds(20, 85, 150, 40);
-//        txsltu.setBorder(border);
-//        txsltu.addFocusListener(new FocusListener() {
-//            @Override
-//            public void focusGained(FocusEvent e) {
-//                txsltu.setBorder(borderinput);
-//                if (txsltu.getText().equals("Số Lượng từ...")) {
-//                    txsltu.setText("");
-//                }
-//            }
-//
-//            @Override
-//            public void focusLost(FocusEvent e) {
-//                txsltu.setBorder(border);
-//                if (txsltu.getText().equals("")) {
-//                    txsltu.setText("Số Lượng từ...");
-//                }
-//            }
-//        });
-
-//        txslden = new JTextField();
-//        txslden.setText("Số Lượng đến...");
-//        txslden.setFont(fonttknc);
-//        txslden.setBounds(220, 85, 150, 40);
-//        txslden.setBorder(border);
-//        txslden.addFocusListener(new FocusListener() {
-//            @Override
-//            public void focusGained(FocusEvent e) {
-//                txslden.setBorder(borderinput);
-//                if (txslden.getText().equals("Số Lượng đến...")) {
-//                    txslden.setText("");
-//                }
-//            }
-//
-//            @Override
-//            public void focusLost(FocusEvent e) {
-//                txslden.setBorder(border);
-//                if (txslden.getText().equals("")) {
-//                    txslden.setText("Số Lượng đến...");
-//                }
-//            }
-//        });
-//
+        
         ImageIcon hinhmuiten1 = new ImageIcon(getClass().getResource("/HinhAnh/muiten1.png"));
         muiten1 = new JLabel();
         muiten1.setIcon(hinhmuiten1);
@@ -250,89 +123,6 @@ public class DatPhongGUI extends JPanel {
         muiten1.setFocusTraversalKeysEnabled(false);
         muiten1.setForeground(new Color(255, 255, 255));
 
-//        lbtknc.add(txsltu);
-//        lbtknc.add(muiten1);
-//        lbtknc.add(txslden);
-//
-//        txngaytu = new JTextField();
-//        txngaytu.setText("Ngày từ...");
-//        txngaytu.setFont(fonttknc);
-//        txngaytu.setBounds(20, 145, 150, 40);
-//        txngaytu.setBorder(border);
-//        txngaytu.addFocusListener(new FocusListener() {
-//            @Override
-//            public void focusGained(FocusEvent e) {
-//                txngaytu.setBorder(borderinput);
-//                if (txngaytu.getText().equals("Ngày từ...")) {
-//                    txngaytu.setText("");
-//                }
-//            }
-//
-//            @Override
-//            public void focusLost(FocusEvent e) {
-//                txngaytu.setBorder(border);
-//                if (txngaytu.getText().equals("")) {
-//                    txngaytu.setText("Ngày từ...");
-//                }
-//            }
-//        });
-//        DatePickerSettings pickerSettings = new DatePickerSettings();
-//        pickerSettings.setColor(DatePickerSettings.DateArea.TextClearLabel, new Color(30, 210, 96));
-//        pickerSettings.setColor(DatePickerSettings.DateArea.CalendarBackgroundNormalDates, new Color(255, 255, 255));
-//        pickerSettings.setColor(DatePickerSettings.DateArea.BackgroundMonthAndYearNavigationButtons, new Color(30, 210, 96));
-//        pickerSettings.setColor(DatePickerSettings.DateArea.TextTodayLabel, new Color(249, 6, 59));
-//
-//        pickerSettings.setSizeDatePanelMinimumHeight(300);
-//        pickerSettings.setSizeDatePanelMinimumWidth(300);
-//        pickerSettings.setVisibleDateTextField(false);
-//        DatePicker dPicker1 = new DatePicker(pickerSettings);
-//        dPicker1.setBounds(20, 185, 30, 30);
-//        dPicker1.setBackground(new Color(100, 100, 100));
-//        dPicker1.setCursor(new Cursor(HAND_CURSOR));
-//        dPicker1.addDateChangeListener((dce) -> {
-//            txngaytu.setText(dPicker1.getDateStringOrEmptyString());
-//        });
-
-//        txngayden = new JTextField();
-//        txngayden.setText("Ngày đến...");
-//        txngayden.setFont(fonttknc);
-//        txngayden.setBounds(220, 145, 150, 40);
-//        txngayden.setBorder(border);
-//        txngayden.addFocusListener(new FocusListener() {
-//            @Override
-//            public void focusGained(FocusEvent e) {
-//                txngayden.setBorder(borderinput);
-//                if (txngayden.getText().equals("Ngày đến...")) {
-//                    txngayden.setText("");
-//                }
-//            }
-//
-//            @Override
-//            public void focusLost(FocusEvent e) {
-//                txngayden.setBorder(border);
-//                if (txngayden.getText().equals("")) {
-//                    txngayden.setText("Ngày đến...");
-//                }
-//            }
-//        });
-//
-//        DatePickerSettings pickerSettings1 = new DatePickerSettings();
-//        pickerSettings1.setColor(DatePickerSettings.DateArea.TextClearLabel, new Color(30, 210, 96));
-//        pickerSettings1.setColor(DatePickerSettings.DateArea.CalendarBackgroundNormalDates, new Color(255, 255, 255));
-//        pickerSettings1.setColor(DatePickerSettings.DateArea.BackgroundMonthAndYearNavigationButtons, new Color(30, 210, 96));
-//        pickerSettings1.setColor(DatePickerSettings.DateArea.TextTodayLabel, new Color(249, 6, 59));
-//
-//        pickerSettings1.setSizeDatePanelMinimumHeight(300);
-//        pickerSettings1.setSizeDatePanelMinimumWidth(300);
-//        pickerSettings1.setVisibleDateTextField(false);
-//        DatePicker dPicker2 = new DatePicker(pickerSettings1);
-//        dPicker2.setBounds(220, 185, 30, 30);
-//        dPicker2.setBackground(new Color(100, 100, 100));
-//        dPicker2.setCursor(new Cursor(HAND_CURSOR));
-//        dPicker2.addDateChangeListener((dce) -> {
-//            txngayden.setText(dPicker2.getDateStringOrEmptyString());
-//        });
-
         ImageIcon hinhmuiten2 = new ImageIcon(getClass().getResource("/HinhAnh/muiten1.png"));
         muiten2 = new JLabel();
         muiten2.setIcon(hinhmuiten1);
@@ -341,55 +131,6 @@ public class DatPhongGUI extends JPanel {
         muiten2.setBorder(bordernull);
         muiten2.setFocusTraversalKeysEnabled(false);
         muiten2.setForeground(new Color(255, 255, 255));
-
-//        lbtknc.add(txngaytu);
-//        lbtknc.add(dPicker1);
-//        lbtknc.add(muiten2);
-//        lbtknc.add(txngayden);
-//        lbtknc.add(dPicker2);
-
-//        ImageIcon hinhtimkiem = new ImageIcon(getClass().getResource("/HinhAnh/timkiem.png"));
-//        timkiem = new JButton();
-//        timkiem.setBounds(380, 0, 70, 215);
-//        timkiem.setBackground(new Color(30, 210, 96));
-//        timkiem.setIcon(hinhtimkiem);
-//        timkiem.setFont(new Font("Segoe UI", Font.BOLD, 20));
-//        timkiem.setFocusPainted(false);
-//        timkiem.setCursor(new Cursor(HAND_CURSOR));
-//        timkiem.setBorder(bordernull);
-//        timkiem.addMouseListener(new MouseListener() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                try {
-//                    timkiemnangcao();
-//                } catch (ParseException ex) {
-//                    Logger.getLogger(HoaDonGUI.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//
-//            @Override
-//            public void mousePressed(MouseEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void mouseReleased(MouseEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void mouseEntered(MouseEvent e) {
-//                timkiem.setBackground(new Color(249, 6, 59));
-//            }
-//
-//            @Override
-//            public void mouseExited(MouseEvent e) {
-//                timkiem.setBackground(new Color(30, 210, 96));
-//            }
-//        });
-
-//        lbtknc.add(timkiem);
-//        lbtknc.setVisible(false);
 
         tknc = new JButton();
         tknc.setBounds(490, 18, 30, 30);
@@ -580,7 +321,7 @@ public class DatPhongGUI extends JPanel {
         if (PDatPhongBUS.dspdphong == null) {
             pdphongbus.docDSPDPhong();
         }
-        for (PDatPhongDTO pdatphong : PDatPhongBUS.dspdphong) {
+        for (PDatPhongDTO pdatphong : PDatPhongBUS.dspdphong) {            
             Vector row = new Vector();
 
             row.add(pdatphong.getMadat());
@@ -596,6 +337,7 @@ public class DatPhongGUI extends JPanel {
             row.add(pdatphong.getTrangthai());
                       
             modelHD.addRow(row);
+            
         }
 
         //Chi tiết HĐ    
@@ -712,9 +454,7 @@ public class DatPhongGUI extends JPanel {
         them.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-//                ThemHDGUI test = new ThemHDGUI();
-//                test.setView("Manager");
-                PhieuDatPhongGUI pdat = new PhieuDatPhongGUI();
+                PhieuDat2 pdat = new PhieuDat2();
                 pdat.setView(id);
             }
 
@@ -749,129 +489,6 @@ public class DatPhongGUI extends JPanel {
         xoa.setBorder(bordernull);
         xoa.setIcon(hinhxoa);
         xoa.setFocusPainted(false);
-//        xoa.addMouseListener(new MouseListener() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                if (clickxoa == -1) 
-//                {
-//                    JOptionPane.showMessageDialog(null, "Chọn hóa đơn hoặc chi tiết hóa đơn để xóa");
-//                } else 
-//                    if (clickxoa == 0) 
-//                    {
-//                    int i = tableHD.getSelectedRow();
-//                    int output = JOptionPane.showConfirmDialog(null, "Có chắc muốn xóa hóa đơn này", "XÓA", JOptionPane.YES_NO_OPTION);
-//                    if (output == JOptionPane.YES_OPTION) {
-//                        HoaDonBUS bushd = new HoaDonBUS();
-//                        if (HoaDonBUS.dshd == null) 
-//                        {
-//                            bushd.docDSHD();
-//                        }
-//                        //Khởi tạo giá trị HĐ
-//                        HoaDonDTO hd = new HoaDonDTO();
-//                        hd.setMahd((String) modelHD.getValueAt(i, 0));
-//                        hd.setNgaylaphd((String) modelHD.getValueAt(i, 4));
-//                        //Integer.valueOf(modelCTHD.getValueAt(j, 3).toString())
-//                        hd.setTongtien(Integer.valueOf(modelHD.getValueAt(i, 5).toString()));
-//                        hd.setTienkm(Integer.valueOf(modelHD.getValueAt(i, 6).toString()));
-//                        hd.setThuctra(Integer.valueOf(modelHD.getValueAt(i, 7).toString()));
-//                        
-//                       
-//                        bushd.XoaHD(hd);
-//                        //Xóa HĐ GUI
-//                        modelHD.removeRow(i);
-//                        tableHD.setModel(modelHD);
-//                        //Xóa CTHD GUI
-//                        modelCTHD.setRowCount(0);
-//                        tableCTHD.setModel(modelCTHD);
-//                    }
-//                }
-//                    else if (clickxoa == 1) // xóa chi tiết hóa đơn
-//                {
-//                    int j = tableCTHD.getSelectedRow();
-//                    int output = JOptionPane.showConfirmDialog(null, "Có chắc muốn xóa CT hóa đơn này", "XÓA", JOptionPane.YES_NO_OPTION);
-//                    if (output == JOptionPane.YES_OPTION) {
-//                        CTHDBUS buscthd = new CTHDBUS();  // thêm mới 
-//                        if (CTHDBUS.dscthd == null) 
-//                        {
-//                            buscthd.docallCTHD();
-//                        }
-//                        //Tạo 1 cthd và chuẩn bị xóa
-//                        CTHDDTO cthd = new CTHDDTO();
-//                        cthd.setMahd((String) modelCTHD.getValueAt(j, 0));
-//                        cthd.setMasach((String) modelCTHD.getValueAt(j, 1));
-//                        cthd.setSoluong(Integer.valueOf(modelCTHD.getValueAt(j, 2).toString()));
-//                        cthd.setThanhtien(Integer.valueOf(modelCTHD.getValueAt(j, 3).toString()));
-//                        cthd.setTienkm(Integer.valueOf(modelCTHD.getValueAt(j, 4).toString()));
-//                        //Trả về hóa đơn gốc của chi tiết hóa đơn
-//                        HoaDonBUS bushd = new HoaDonBUS();
-//                        HoaDonDTO hd = new HoaDonDTO();
-//                        hd = bushd.TimHDtheoCTHD(cthd);
-//                        //Xóa đi chi tiết hóa đơn
-//                        CTHDBUS busct = new CTHDBUS();
-//                        busct.XoaCTHDtheoHD(cthd);
-//                        //HD chỉnh lại giá trị tổng tiền và số lượng sau khi xóa CTHĐ(DTO)
-//                       hd.setTongtien(hd.getTongtien()-(cthd.getThanhtien()));
-//                        
-//                    hd.setThuctra(hd.getTongtien() - (hd.getTienkm()));
-////                        hd.setThanhtien(hd.getThanhtien() - (cthd.getDongia() * cthd.getSoluong()));
-//                        //  hd.setSoluongtong(hd.getSoluongtong() - cthd.getSoluong());
-//                        //Cập nhật lại HD mới sau khi chỉnh sửa (BUS + DAO)
-//                        
-//                        //bushd.SuaHD(hd);
-//                        //Xóa dòng CTHD
-//                        modelCTHD.removeRow(j);
-//                        tableCTHD.setModel(modelCTHD);
-//                        //Cập nhật lại HD mới sau khi chỉnh sửa (GUI)
-//                        if (j == 0) 
-//                        {
-//                            bushd.XoaHD(hd);//Xóa hóa đơn nếu là CTHD cuối cùng
-//                            for (int i = 0; i < tableHD.getRowCount(); i++) {
-//                                if (hd.getMahd().equals(tableHD.getValueAt(i, 0))) {
-//                                    modelHD.removeRow(i);
-//                                    tableHD.setModel(modelHD);
-//                                    break;
-//                                }
-//                            }
-//                        } else {
-//                            for (int i = 0; i < tableHD.getRowCount(); i++) {
-//                                if (hd.getMahd().equals(tableHD.getValueAt(i, 0))) {
-//                                    // modelHD.setValueAt(hd.getSoluongtong(), i, 5);
-//                                    modelHD.setValueAt(hd.getTongtien(), i, 2);
-//                                    modelHD.setValueAt(hd.getThuctra(), i, 4);
-//                                    // modelHD.setValueAt(hd.getThanhtien(), i, 7);
-//                                    tableHD.setModel(modelHD);
-//                                    break;
-//                                }
-//                            }
-//                        }
-//
-//                        //END
-//                    }
-//                }
-//
-//            }
-//
-//            @Override
-//            public void mousePressed(MouseEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void mouseReleased(MouseEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void mouseEntered(MouseEvent e) {
-//                xoa.setIcon(hinhxoa1);
-//            }
-//
-//            @Override
-//            public void mouseExited(MouseEvent e) {
-//                xoa.setIcon(hinhxoa);
-//            }
-//
-//        });
 
         ImageIcon hinhsua = new ImageIcon(getClass().getResource("/HinhAnh/sua.png"));
         ImageIcon hinhsua1 = new ImageIcon(getClass().getResource("/HinhAnh/sua1.png"));
@@ -886,16 +503,6 @@ public class DatPhongGUI extends JPanel {
         sua.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-//                if (clickxoa == -1) {
-//                    JOptionPane.showMessageDialog(null, "Chọn HĐ để sửa");
-//                }
-//                int i = tableHD.getSelectedRow();
-//                if (i >= 0) {
-//                    SuaHDGUI testsua = new SuaHDGUI();
-//                    testsua.setView();
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Chọn HĐ để sửa, không chọn chi tiết hóa đơn");
-//                }
             }
 
             @Override
@@ -933,17 +540,6 @@ public class DatPhongGUI extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-//                int i = tableHD.getSelectedRow();
-//                if (i >= 0) {
-//                    try {
-//                        ReportPDF in = new ReportPDF(tableHD.getValueAt(i, 0).toString());
-//                    } catch (IOException ex) {
-//                        Logger.getLogger(HoaDonGUI.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Vui lòng chọn bảng hóa đơn để in hóa đơn");
-//                }
 
             }
 
@@ -999,31 +595,6 @@ public class DatPhongGUI extends JPanel {
                     rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text + ".*", choice));
                 }
                 
-                
-
-
-//                try {
-//                    String text = txtimkiem.getText();
-//                    if (choice == 2) {
-//                        if (text.trim().length() == 0) {
-//                            rowSorter.setRowFilter(null);
-//                        } else {
-//                           // rowSorter.setRowFilter(RowFilter.regexFilter(Chuyentien(text), choice));
-//                           rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, choice));
-//                        }
-//                    }
-//
-//                    if (choice != 7 && choice != 6) {
-//                        if (text.trim().length() == 0) {
-//                            rowSorter.setRowFilter(null);
-//                        } else {
-//                            rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, choice));
-//                        }
-//                    }
-//                } catch (NumberFormatException ex) {
-//                    JOptionPane.showMessageDialog(null, "Khi tìm kiếm theo giá buộc phải nhập số");
-//                }
-
             }
 
             @Override
@@ -1034,32 +605,6 @@ public class DatPhongGUI extends JPanel {
                 } else {
                     rowSorter.setRowFilter(RowFilter.regexFilter("(?i)^" + text + ".*", choice));
                 }
- //               try {
- //                   String text = txtimkiem.getText();
-//                    if (choice == 7) {
-//                        if (text.trim().length() == 0) {
-//                            rowSorter.setRowFilter(null);
-//                        } else {
-//                            rowSorter.setRowFilter(RowFilter.regexFilter(Chuyentien(text), choice));
-//                        }
-//                    }
-//                    if (choice == 6) {
-//                        if (text.trim().length() == 0) {
-//                            rowSorter.setRowFilter(null);
-//                        } else {
-//                            rowSorter.setRowFilter(RowFilter.regexFilter(Chuyentien(text), choice));
-//                        }
-//                    }
-//                    if (choice != 7 && choice != 6) {
-//                        if (text.trim().length() == 0) {
-//                            rowSorter.setRowFilter(null);
-//                        } else {
-//                            rowSorter.setRowFilter(RowFilter.regexFilter("(?i)^" + text + ".*", choice));
-//                        }
-//                    }
-//                } catch (NumberFormatException ex) {
-//                    JOptionPane.showMessageDialog(null, "Khi tìm kiếm theo giá buộc phải nhập số");
-//                }
             }
 
             @Override
@@ -1099,97 +644,18 @@ public class DatPhongGUI extends JPanel {
         return d;
     }
 
-//    public void timkiemnangcao() throws ParseException {
-//        int giatu;
-//        int giaden;
-//        int sltu;
-//        int slden;
-//        String ngaytu;
-//        String ngayden;
-//
-//        if ("".equals(txgiatu.getText()) || "Giá từ...".equals(txgiatu.getText())) {
-//            giatu = 0;
-//        } else {
-//            giatu = Integer.valueOf(txgiatu.getText());
-//        }
-//
-//        if ("".equals(txgiaden.getText()) || "Giá đến...".equals(txgiaden.getText())) {
-//            giaden = 100000000;
-//        } else {
-//            giaden = Integer.valueOf(txgiaden.getText());
-//        }
-//
-//        if ("".equals(txsltu.getText()) || "Số Lượng từ...".equals(txsltu.getText())) {
-//            sltu = 0;
-//        } else {
-//            sltu = Integer.valueOf(txsltu.getText());
-//        }
-//
-//        if ("".equals(txslden.getText()) || "Số Lượng đến...".equals(txslden.getText())) {
-//            slden = 1000;
-//        } else {
-//            slden = Integer.valueOf(txslden.getText());
-//        }
-//        if ("".equals(txngaytu.getText()) || "Ngày từ...".equals(txngaytu.getText())) {
-//            ngaytu = "1999-05-26";
-//        } else {
-//            ngaytu = txngaytu.getText();
-//        }
-//
-//        if ("".equals(txngayden.getText()) || "Ngày đến...".equals(txngayden.getText())) {
-//            Date date = new Date();
-//            ngayden = ChuyenString(date);
-//        } else {
-//            ngayden = txngayden.getText();
-//        }
-//        HoaDonBUS bushd = new HoaDonBUS();
-//        if (HoaDonBUS.dshd == null) {
-//            bushd.docDSHD();
-//        }
-//
-//        ArrayList<HoaDonDTO> dstk = new ArrayList<>();
-//        dstk = bushd.Timkiemnangcao(giatu, giaden, sltu, slden, ngaytu, ngayden);
-//
-//        modelHD.setRowCount(0);
-//        tableHD.setModel(modelHD);
-//
-//        for (HoaDonDTO hd : dstk) {
-//            Vector row = new Vector();
-//            row.add(hd.getMahd());
-//            row.add(hd.getMakh());
-//            row.add(hd.getManv());
-//            row.add(hd.getMakm());
-//            row.add(hd.getNgaymua());
-//            row.add(hd.getSoluongtong());
-//            row.add(Chuyentien(String.valueOf(hd.getTongtien())));
-//            row.add(Chuyentien(String.valueOf(hd.getThanhtien())));
-//            modelHD.addRow(row);
-//        }
 
-        //lbtknc.setBounds(340, 65, 450, 215);
-    //}
-
-//    public static void main(String[] args) {
-//        HoaDonGUI a = new HoaDonGUI();
-//        a.setVisible(true);
-//        JFrame f = new JFrame();
-//        f.setSize(1500, 800);
-//        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        f.add(a);
-//        f.setVisible(true);
-//
-//    }
     
     // TEST THỬ
-    public static void main(String args[])
-    {
-        DatPhongGUI dp = new DatPhongGUI("LT1");
-        JFrame f = new JFrame();
-        f.setSize(1355, 950);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.add(dp);
-        f.setVisible(true);
-    }
+//    public static void main(String args[])
+//    {
+//        DatPhongGUI dp = new DatPhongGUI("LT1");
+//        JFrame f = new JFrame();
+//        f.setSize(1355, 950);
+//        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        f.add(dp);
+//        f.setVisible(true);
+//    }
 }
 
 

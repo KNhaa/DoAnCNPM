@@ -26,6 +26,14 @@ public class CTDatPhongBUS {
         if(dsctdatphong==null)
            dsctdatphong = new ArrayList<CTDatPhongDTO>();
         dsctdatphong = data.docDSCTDPtheoMa(ma);
-    }
+    } 
     
+    public void themCTDP(CTDatPhongDTO ctdp)
+    {
+        //dsctdatphong.add(ctdp);
+        CTDatPhongDAO data = new CTDatPhongDAO();
+        data.them(ctdp);
+        
+    }
+            
 }
