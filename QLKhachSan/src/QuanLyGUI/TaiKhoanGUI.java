@@ -668,7 +668,7 @@ public class TaiKhoanGUI extends JPanel {
                    txttentaikhoan.setText(tk.getTentaikhoan());
                     pfmatkhau.setText(tk.getMatkhau());
                    txtmanhanvien.setText(tk.getManhanvien());
-                    if (tk.getTrangthai().equals("hoạt động")) 
+                    if (tk.getTrangthai().equals("Hoạt động")) 
                     {
                         chontrangthai.setSelectedIndex(1);
                     }

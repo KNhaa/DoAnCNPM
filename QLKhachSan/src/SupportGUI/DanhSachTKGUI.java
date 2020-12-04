@@ -83,7 +83,7 @@ public class DanhSachTKGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-                System.exit(0);
+              //  System.exit(0);
             }
 
             @Override

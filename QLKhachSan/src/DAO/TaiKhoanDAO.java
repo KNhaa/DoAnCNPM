@@ -49,9 +49,10 @@ public class TaiKhoanDAO {
      public void Them(TaiKhoanDTO tk1){
          MySQLConnect ConnectData = new MySQLConnect();
          try{
-             String qry ="insert into taikhoan value('";
-                     qry+=tk1.getTentaikhoan()+"','"+tk1.getMatkhau()+"','"+tk1.getManhanvien()+"','"+tk1.getTrangthai()+"')";
-            
+              String qry = "insert into taikhoan value('";
+            qry += tk1.getTentaikhoan()+"','"+tk1.getMatkhau()+"','"+tk1.getManhanvien()+"','"
+         
+            +tk1.getTrangthai()+"')";
             ConnectData.st = (com.mysql.jdbc.Statement) ConnectData.conn.createStatement();
           ConnectData.st.executeUpdate(qry);        
          }catch(SQLException ex){

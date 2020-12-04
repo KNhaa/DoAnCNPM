@@ -7,6 +7,7 @@ package SupportGUI;
 
 import BUS.DanhSachBUS;
 import DTO.DanhSachDTO;
+import static com.itextpdf.layout.layout.LayoutResult.NOTHING;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -14,6 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Vector;
+import static javafx.scene.control.ButtonType.CLOSE;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -50,7 +52,7 @@ public class DanhSachGUI extends JFrame {
        this.setUndecorated(true);
         this.setSize(900, 700);
         this.setVisible(true);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE );
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setLayout(null);
@@ -80,8 +82,8 @@ public class DanhSachGUI extends JFrame {
         btnexit.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                dispose();
-                System.exit(0);
+          dispose();
+              //  System.exit(0);
             }
 
             @Override
