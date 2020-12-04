@@ -403,7 +403,7 @@ public class QuanLyFrame extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                NhanVienGUI nvGUI = new NhanVienGUI();
+                NhanVienGUI nvGUI = new NhanVienGUI("LT1");
                 pncontent.removeAll();
                 pncontent.add(nvGUI);
                 pncontent.setBounds(250, 0, 1350, 945);
@@ -543,7 +543,7 @@ public class QuanLyFrame extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
-                TaiKhoanGUI taikhoanGUI = new TaiKhoanGUI();
+                TaiKhoanGUI taikhoanGUI = new TaiKhoanGUI("BV");
                 pncontent.removeAll();
                 pncontent.add(taikhoanGUI);
                 pncontent.setBounds(250, 0, 1350, 945);
