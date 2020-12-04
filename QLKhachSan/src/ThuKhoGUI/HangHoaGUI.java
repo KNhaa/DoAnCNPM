@@ -8,23 +8,40 @@ package ThuKhoGUI;
 
 import BUS.HangHoaBUS;
 import DTO.HangHoaDTO;
+import NVKinhDoanhGUI.TKDichVuGUI;
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import java.io.IOException;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import static java.awt.Frame.HAND_CURSOR;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Vector;
-import java.util.regex.Pattern;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
+import javax.swing.event.MouseInputListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -65,37 +82,45 @@ public class HangHoaGUI extends JPanel {
         lbtop.setBackground(new Color(134, 174, 195));
         lbtop.setOpaque(true);
         
-        String tk[] = {"Theo Mã HH", "Theo Mã kho","Theo Tên hàng", "Theo Giá", "Theo đơn vị tính", 
-            "Theo số lượng"};
-        
-        JComboBox cb = new JComboBox(tk);
-        cb.setBounds(340, 18, 130, 32);
-        cb.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        cb.setBorder(border);
-        cb.setBackground(new Color(255, 255, 255));
-        cb.addActionListener((ActionEvent e) -> {
-            choice = cb.getSelectedIndex();
-            System.out.println(choice);
-        });
-        
-        
+        txtimkiem = new JTextField(18);
+        txtimkiem.setFont(font);
+        txtimkiem.setBounds(70, 18, 250, 30);
+        txtimkiem.setBorder(border);
        
         ImageIcon hinhtimkiem = new ImageIcon(getClass().getResource("/HinhAnh/timkiem.png"));       
         timkiem = new JButton();
-        timkiem.setBounds(490, 15, 80, 40);       
+        timkiem.setBounds(380, 15, 80, 40);       
         timkiem.setBackground(new Color(31,73,91));
         timkiem.setIcon(hinhtimkiem);
         timkiem.setFont(font);
         timkiem.setBorder(bordernull);
         timkiem.setFocusPainted(false);
         timkiem.setCursor(new Cursor(HAND_CURSOR));      
-        
-        
-        txtimkiem = new JTextField(18);
-        txtimkiem.setFont(font);
-        txtimkiem.setBounds(70, 18, 250, 30);
-        txtimkiem.setBorder(border);
-       
+        timkiem.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+               
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {                   
+            }
+        });
 
         lbexit = new JLabel();
         lbexit.setBackground(new Color(33, 33, 33));
@@ -142,13 +167,15 @@ public class HangHoaGUI extends JPanel {
         lbexit.add(exit);      
         lbtop.add(lbexit);
         lbtop.add(txtimkiem);
-        lbtop.add(cb);
+        lbtop.add(timkiem);
+        
         
         //code tiếp giao diện ở đây
 
         lbhanghoa = new JLabel("Sản Phẩm");
         lbhanghoa.setBounds(30, 80, 200, 60);
         lbhanghoa.setFont(new Font("Segoe UI", Font.BOLD, 30));
+        //lbinfosp.setForeground(new Color(30, 215, 96));
         lbhanghoa.setForeground(new Color(31,73,91));
         
         lbmahang= new JLabel("Mã hàng",JLabel.LEFT);
@@ -165,8 +192,14 @@ public class HangHoaGUI extends JPanel {
         lbmakho.setFont(font1);
         lbmakho.setForeground(new Color(33,33,33));
         
+//        txmakho = new JTextField(18);
+//        txmakho.setFont(font);
+//        txmakho.setBounds(420, 165, 60, 30);     
+//        txmakho.setBorder(border);
+        
         String choose[] = {"----","MK1", "MK2"};
         chonmakho = new JComboBox(choose);
+        //chonmakho.setBounds(340, 18, 130, 32);
         chonmakho.setFont(new Font("Segoe UI", Font.BOLD, 16));
         chonmakho.setBorder(border);
         chonmakho.setBounds(420, 165, 100, 30);
@@ -202,6 +235,8 @@ public class HangHoaGUI extends JPanel {
         txdonvitinh.setBounds(730, 165, 60, 30);     
         txdonvitinh.setBorder(border);
         
+        
+//        == manxb
         lbsoluong = new JLabel ("Số lượng",JLabel.LEFT);
         lbsoluong.setBounds(600, 230, 100, 50);
         lbsoluong.setFont(font1);
@@ -227,7 +262,7 @@ public class HangHoaGUI extends JPanel {
             int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm sản phẩm", "Thêm", dialogButton);
             if(dialogResult == 0)
                 try{
-                HangHoaDTO sp = new HangHoaDTO(); 
+                HangHoaDTO sp = new HangHoaDTO(); // nho cai nay
                 sp.setMahang(txmahang.getText());
                 sp.setMakho(chonmakho.getSelectedItem().toString());
                 sp.setTenhang(txtenhang.getText());
@@ -253,6 +288,8 @@ public class HangHoaGUI extends JPanel {
                     
                     model.addRow(row);
                     table.setModel(model);
+                    
+                    //txmakho.setText("");
                     chonmakho.setSelectedIndex(0);
                     txmahang.setText("");
                     txtenhang.setText("");
@@ -262,7 +299,7 @@ public class HangHoaGUI extends JPanel {
                     
                 } 
                  } catch (NumberFormatException ex) {
-              
+               // JOptionPane.showMessageDialog(null, "Số lượng và giá tiền phải là kiểu số");
             }
             }
 
@@ -300,29 +337,6 @@ public class HangHoaGUI extends JPanel {
         xoa.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa SP", "Xóa", dialogButton);
-            if(dialogResult == 0)
-            {
-                HangHoaBUS bus = new HangHoaBUS();
-                if (!bus.Xoa(txmahang.getText().toString())) 
-                {
-                return;
-                } 
-                else 
-                {
-                int i = table.getSelectedRow();
-                model.removeRow(i);
-                table.setModel(model);
-               txmahang.setText("");
-                txtenhang.setText("");
-                txgia.setText("");
-                txdonvitinh.setText("");
-                txsoluong.setText("");
-                chonmakho.setSelectedIndex(0);
-                
-                }
-            }
             }
 
             @Override
@@ -359,98 +373,7 @@ public class HangHoaGUI extends JPanel {
         
         sua.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e) 
-            {
-
-                    int i = table.getSelectedRow();
-                    if (i >= 0) {
-                        try {
-                            
-                            if(txsoluong.getText().equals(""))
-                            {
-                                JOptionPane.showMessageDialog(null,"Không được để trống số lượng");
-                                return ;
-                            }
-                            else
-                            {
-                                String pattern = "^[0-9]{1,}$";
-                                if(!Pattern.matches(pattern, txsoluong.getText()))
-                                {
-                                    JOptionPane.showMessageDialog(null,"Chỉ được nhập số");
-                                    return ;
-                                }
-                            }
-                            
-                            if(txgia.getText().equals(""))
-                            {
-                                JOptionPane.showMessageDialog(null, "Không được để trống đơn giá");
-                                return;
-                            }
-                            else
-                            {
-                                String pattern = "^[0-9]{1,}$";
-                                if(!Pattern.matches(pattern, txgia.getText()))
-                                {
-                                    JOptionPane.showMessageDialog(null,"Chỉ được nhập số");
-                                    return ;
-                                }
-                            }
-                            
-                            if(txtenhang.getText().equals(""))
-                            {
-                                JOptionPane.showMessageDialog(null,"Không được để trống tên hàng hóa");
-                                return;
-                            }  
-                            if(txmahang.getText().equals(""))
-                            {
-                                JOptionPane.showMessageDialog(null,"Không được để trống mã hàng hóa");
-                                return;
-                            }  
-                                                       
-                            HangHoaDTO sp = new HangHoaDTO();
-                            sp.setMahang(txmahang.getText());
-                            sp.setMakho(chonmakho.getSelectedItem().toString());
-                            sp.setTenhang(txtenhang.getText());
-                            sp.setGia(Integer.parseInt(txgia.getText()));
-                            sp.setDonvitinh(txdonvitinh.getText());
-                            sp.setSoluong(Integer.parseInt(txsoluong.getText()));
-                            
-                           
-                            HangHoaBUS bus = new HangHoaBUS();
-                            if (!bus.Sua(sp)) {
-                                return;
-                            } else {
-                                Vector row = new Vector();                  
-                               row.add(sp.getMahang());
-                                row.add(sp.getMakho());
-                                row.add(sp.getTenhang());
-                                row.add(sp.getGia());
-                                row.add(sp.getDonvitinh());
-                                row.add(sp.getSoluong());
-                   
-                               
-                                model.removeRow(i); // dòng chọn
-                                model.insertRow(i, row);
-                                table.setModel(model);
-                                
-                                txtenhang.setText("");
-                                txdonvitinh.setText("");
-                                txsoluong.setText("");
-                                txgia.setText("");
-                                chonmakho.setSelectedIndex(0);
-                                txmahang.setText("");
-
-                            }
-                        } catch (NullPointerException ex) {
-                            JOptionPane.showMessageDialog(null, ex.toString());
-                        }
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Vui lòng chọn dòng");
-                    }
-            //    }
-
-                
+            public void mouseClicked(MouseEvent e) {
             }
 
             @Override
@@ -474,55 +397,9 @@ public class HangHoaGUI extends JPanel {
             }
 
         });
-        
-         ImageIcon hinhreset = new ImageIcon(getClass().getResource("/HinhAnh/reset.png"));
-        ImageIcon hinhreset1 = new ImageIcon(getClass().getResource("/HinhAnh/reset2.png"));
-        reset = new JButton();
-        reset.setBounds(700, 290, 130, 70);
-        reset.setBackground(new Color(33, 33, 33));
-        reset.setBorder(bordernull);
-        reset.setIcon(hinhreset);
-        reset.setFocusPainted(false);
-        reset.setContentAreaFilled(false);      
-        reset.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                
-                 HangHoaBUS hhbus = new HangHoaBUS();        
-            txmahang.setText("");            
-            txtenhang.setText("");
-            txgia.setText("");
-            txsoluong.setText("");
-            txdonvitinh.setText("");
-            chonmakho.setSelectedIndex(0);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                reset.setIcon(hinhreset1);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                reset.setIcon(hinhreset);
-            }
-
-        });
-        
         them.setContentAreaFilled(false);
         xoa.setContentAreaFilled(false);
         sua.setContentAreaFilled(false);
-        reset.setContentAreaFilled(false);
         
          Vector header = new Vector();       
         header.add("Mã Hàng");
@@ -540,10 +417,10 @@ public class HangHoaGUI extends JPanel {
         table.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         table.getColumnModel().getColumn(0).setPreferredWidth(25);
         table.getColumnModel().getColumn(1).setPreferredWidth(25);
-        table.getColumnModel().getColumn(2).setPreferredWidth(160);
+        table.getColumnModel().getColumn(2).setPreferredWidth(25);
         table.getColumnModel().getColumn(3).setPreferredWidth(25);
         table.getColumnModel().getColumn(4).setPreferredWidth(25);
-        table.getColumnModel().getColumn(5).setPreferredWidth(25);
+        table.getColumnModel().getColumn(5).setPreferredWidth(160);
         table.getTableHeader().setForeground(new Color(255, 255, 255));
         table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 20));
         table.getTableHeader().setBackground(new Color(31,73,91));
@@ -562,8 +439,10 @@ public class HangHoaGUI extends JPanel {
             row.add(sp.getMahang());
             row.add(sp.getMakho());
             row.add(sp.getTenhang());
+           // row.add(sp.getMa());
             row.add(sp.getGia());
             row.add(sp.getDonvitinh());
+            //row.add(Chuyentien(String.valueOf(sp.getDongia())));
             row.add(sp.getSoluong());
             model.addRow(row);
         }
@@ -619,45 +498,6 @@ public class HangHoaGUI extends JPanel {
          });
          
         
-        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(table.getModel());
-        table.setRowSorter(rowSorter);
-        txtimkiem.getDocument().addDocumentListener(new DocumentListener() {
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                try {
-                    String text = txtimkiem.getText();
-                    if (choice == 4 || choice == 6 ) { // theo số lượng hoac theo gia
-                        if (text.trim().length() == 0) {
-                            rowSorter.setRowFilter(null);
-                        } else {
-                            rowSorter.setRowFilter(RowFilter.regexFilter("^" + text + "$", choice));
-                        }
-                    }
-                    if (choice != 4 && choice != 6) {
-                        if (text.trim().length() == 0) {
-                            rowSorter.setRowFilter(null);
-                        } else {
-                            rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, choice));
-                        }
-                    }
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Khi tìm kiếm theo giá buộc phải nhập số");
-                }
-
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                 
-            }
-        });
-        
         
     //----------**** add các thành phần giao diện ở dưới này ***--------
         this.add(lbtop); 
@@ -665,6 +505,7 @@ public class HangHoaGUI extends JPanel {
         this.add(lbmahang);
         this.add(txmahang);
         this.add(lbmakho);
+       // this.add(txmakho);
         this.add(lbtenhang);
         this.add(txtenhang);
         this.add(lbgia);
@@ -678,7 +519,6 @@ public class HangHoaGUI extends JPanel {
         this.add(xoa);
         this.add(chonmakho);
         this.add(bangsp);
-        this.add(reset);
     }
  public static void main(String[] args) {
         HangHoaGUI a=new HangHoaGUI();
