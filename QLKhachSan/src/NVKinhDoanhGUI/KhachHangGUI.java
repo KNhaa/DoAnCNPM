@@ -207,6 +207,7 @@ public class KhachHangGUI extends JPanel {
         tblDSKH.getColumnModel().getColumn(2).setPreferredWidth(30);
         tblDSKH.getColumnModel().getColumn(3).setPreferredWidth(30);
         tblDSKH.getColumnModel().getColumn(4).setPreferredWidth(50);
+        tblDSKH.getColumnModel().getColumn(5).setPreferredWidth(50);
 
         tblDSKH.getTableHeader().setForeground(new Color(255, 255, 255));
         tblDSKH.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 20));
@@ -268,8 +269,18 @@ public class KhachHangGUI extends JPanel {
         btnTimkiem.setIcon(hinhtimkiem);
         btnTimkiem.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                
+            public void mouseClicked(MouseEvent e) {           
+                String makh = JOptionPane.showInputDialog(this, "Nhập mã khách hàng cần tìm");
+
+                if(makh != null && makh.length() > 0) {
+                    DSKhachHang = (ArrayList<KhachHangDTO>) KhachHangBUS.timkiemKH(makh);
+
+                    dtm.setRowCount(0);
+
+                    DSKhachHang.forEach((KhachHangDTO) -> {
+                        dtm.addRow(new Object[] {KhachHangDTO.getMaKH(), KhachHangDTO.getTenKH(), KhachHangDTO.getNgaysinh(), KhachHangDTO.getSDT(),KhachHangDTO.getEmail(),KhachHangDTO.getDiachi()});
+                    });
+                } 
             }
 
             @Override
