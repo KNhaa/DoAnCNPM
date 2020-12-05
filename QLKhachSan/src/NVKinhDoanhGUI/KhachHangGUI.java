@@ -553,7 +553,7 @@ public class KhachHangGUI extends JPanel {
     
     public class DateLabelFormatter extends AbstractFormatter {
 
-        private String datePattern = "dd-MM-yyyy";
+        private String datePattern = "yyyy-MM-dd";
         private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
 
         @Override
