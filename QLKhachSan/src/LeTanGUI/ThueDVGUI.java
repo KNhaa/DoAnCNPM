@@ -165,7 +165,7 @@ public class ThueDVGUI extends JPanel {
         lbtop.add(lbexit);
         
         //code tiếp giao diện ở đây
-        DatDichVuGUI datdv=new DatDichVuGUI();
+        ThueDVu datdv=new ThueDVu();
         datdv.setBounds(0,0,950,880);
 
         

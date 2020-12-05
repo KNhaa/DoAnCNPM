@@ -156,18 +156,19 @@ public class ThanhToanGUI extends JPanel {
   
         lbexit.add(exit);      
         lbtop.add(lbexit);
-        lbtop.add(txtimkiem);
-        lbtop.add(timkiem);
+
         
         
         //code tiếp giao diện ở đây
-
+        ThanhToanHD thanhtoan=new ThanhToanHD();
+        thanhtoan.setBounds(0,0,950,880);
         
 
         
         
     //----------**** add các thành phần giao diện ở dưới này ***--------
-        this.add(lbtop);    
+        this.add(lbtop); 
+        this.add(thanhtoan);
     }
 
 
