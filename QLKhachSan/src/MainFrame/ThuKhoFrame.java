@@ -9,7 +9,6 @@ import LeTanGUI.ThueDVGUI;
 import ThuKhoGUI.DatHangGUI;
 import ThuKhoGUI.HangHoaGUI;
 import ThuKhoGUI.NhapKhoGUI;
-import ThuKhoGUI.TKHangGUI;
 import ThuKhoGUI.XuatKhoGUI;
 import java.awt.*;
 import static java.awt.Frame.HAND_CURSOR;
@@ -620,14 +619,14 @@ public class ThuKhoFrame extends JFrame {
             // THANH TOÁN GUI
             @Override
             public void mouseClicked(MouseEvent e) {
-                TKHangGUI tkhangGUI = new TKHangGUI();
-                pncontent.removeAll();
-                pncontent.add(tkhangGUI);
-                pncontent.setBounds(250, 0, 1350, 945);
-                pncontent.repaint();
-                tkhangGUI.revalidate();
-                tkhangGUI.repaint();
-                
+//                TKHangGUI tkhangGUI = new TKHangGUI();
+//                pncontent.removeAll();
+//                pncontent.add(tkhangGUI);
+//                pncontent.setBounds(250, 0, 1350, 945);
+//                pncontent.repaint();
+//                tkhangGUI.revalidate();
+//                tkhangGUI.repaint();
+//                
                 
                 c6.setBackground(color_part);
                 c2.setBackground(color_background);

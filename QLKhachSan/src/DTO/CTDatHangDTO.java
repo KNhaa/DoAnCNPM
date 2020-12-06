@@ -10,14 +10,7 @@ package DTO;
  * @author Truong Thuy Doanh
  */
 public class CTDatHangDTO {
-    /*
-    `mapdh` char(15) NOT NULL,
-  `mahang` char(15) NOT NULL,
-  `tenhang` varchar(255) NOT NULL,
-  `donvitinh` varchar(255) NOT NULL,
-  `sl` int(11) NOT NULL,
-  `thanhtien` int(11) NOT NULL
-    */
+   
     String mapdh, mahang, tenhang, donvitinh;
     int sl, thanhtien;
     
