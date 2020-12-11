@@ -133,6 +133,25 @@ CREATE TABLE `ctdathang` (
 
 -- --------------------------------------------------------
 
+-- Dumping data for table `ctdathang`
+--
+
+INSERT INTO `ctdathang` (`mapdh`, `mahang`, `tenhang`, `donvitinh`, `sl`, `thanhtien`) VALUES
+('PDH0001', 'HH1', 'Khăn mặt', 'cái', 10, 500000),
+('PDH0001', 'HH10', 'Coca Cola', 'Chai', 40, 400000),
+('PDH0002', 'HH2', 'Bàn chải đánh răng', 'Cái', 50, 5000000),
+('PDH0003', 'HH3', 'Dép', 'Đôi', 4, 100000),
+('PDH0003', 'HH5', 'Bao gối', 'Cái', 51, 612000),
+('PDH0004', 'HH10', 'Coca Cola', 'Chai', 30, 300000),
+('PDH0005', 'HH4', 'Áo choàng tắm', 'Cái', 50, 3750000),
+('PDH0006', 'HH7', 'Chăn', 'Cái', 10, 1750000),
+('PDH0007', 'HH8', 'Dầu gội', 'tuýp', 20, 300000),
+('PDH0008', 'HH5', 'Bao gối', 'Cái', 30, 360000),
+('PDH0008', 'HH9', 'Sữa tắm', 'Tuýp', 10, 150000),
+('PDH0009', 'HH3', 'Dép', 'Đôi', 60, 1500000),
+('PDH0010', 'HH1', 'Khăn mặt', 'Cái', 50, 250000),
+('PDH0010', 'HH10', 'Coca Cola', 'Chai', 40, 400000);
+
 --
 -- Cấu trúc bảng cho bảng `ctdvu`
 --
@@ -530,16 +549,17 @@ CREATE TABLE `phieudathang` (
 --
 
 INSERT INTO `phieudathang` (`mapdh`, `manv`, `tongsl`, `tongtien`, `tennhacc`, `thoigiangiao`) VALUES
-('PDH0001', 'TK1', 0, 0, 'Mỹ An', '2020-06-03'),
-('PDH0002', 'TK1', 0, 0, 'Mỹ Nhung', '2020-07-13'),
-('PDH0003', 'TK2', 0, 0, 'Mỹ An', '2020-07-31'),
-('PDH0004', 'TK2', 0, 0, 'Mỹ Nhung', '2020-08-02'),
-('PDH0005', 'TK1', 0, 0, 'Mỹ An', '2020-09-09'),
-('PDH0006', 'TK1', 0, 0, 'Mỹ An', '2020-09-16'),
-('PDH0007', 'TK2', 0, 0, 'Thành Minh', '2020-09-22'),
-('PDH0008', 'TK2', 0, 0, 'Minh Bảo', '2020-11-01'),
-('PDH0009', 'TK2', 0, 0, 'Bảo Minh', '2020-11-02'),
-('PDH0010', 'TK2', 0, 0, 'Bảo Bảo', '2020-11-16');
+('PDH0001', 'TK1', 50, 900000, 'Mỹ An', '2020-06-03'),
+('PDH0002', 'TK1', 50, 500000, 'Mỹ Nhung', '2020-07-13'),
+('PDH0003', 'TK2', 55, 712000, 'Mỹ An', '2020-07-31'),
+('PDH0004', 'TK2', 30, 300000, 'Mỹ Nhung', '2020-08-02'),
+('PDH0005', 'TK1', 50, 3750000, 'Mỹ An', '2020-09-09'),
+('PDH0006', 'TK1', 10, 1750000, 'Mỹ An', '2020-09-16'),
+('PDH0007', 'TK2', 20, 300000, 'Thành Minh', '2020-09-22'),
+('PDH0008', 'TK2', 40, 510000, 'Minh Bảo', '2020-11-01'),
+('PDH0009', 'TK2', 60, 1500000, 'Bảo Minh', '2020-11-02'),
+('PDH0010', 'TK2', 50, 250000, 'Bảo Bảo', '2020-11-16');
+
 
 -- --------------------------------------------------------
 
@@ -645,16 +665,16 @@ CREATE TABLE `phieunhapkho` (
 --
 
 INSERT INTO `phieunhapkho` (`mapnk`, `makho`, `manv`, `ngaynhapkho`, `tongsltrenchungtu`, `tongslthucnhap`, `tongtien`, `tennguoigiao`, `ghichu`) VALUES
-('PNK0001', 'MK2', 'TK1', '2020-06-03', 50, 50, 0, 'Thái Phùng Bảo Minh', ''),
-('PNK0002', 'MK1', 'TK2', '2020-07-13', 50, 50, 0, 'Trần Mạnh Hùng', ''),
-('PNK0003', 'MK1', 'TK1', '2020-07-31', 55, 55, 0, 'Nguyễn Mạnh Hùng', ''),
-('PNK0004', 'MK2', 'TK2', '2020-08-02', 30, 29, 0, 'Trần Văn Chiến', ''),
-('PNK0005', 'MK2', 'TK1', '2020-09-09', 50, 50, 0, 'Nguyễn Văn Chiến', ''),
-('PNK0006', 'MK2', 'TK1', '2020-09-16', 10, 10, 0, 'Phùng Thái Bảo', ''),
-('PNK0007', 'MK2', 'TK1', '2020-09-22', 20, 20, 0, 'Nguyễn Văn Chiến', ''),
-('PNK0008', 'MK1', 'TK1', '2020-11-01', 40, 40, 0, 'Huỳnh Văn Bảy', ''),
-('PNK0009', 'MK2', 'TK2', '2020-11-02', 60, 58, 0, 'Huỳnh Văn BẢy', ''),
-('PNK0010', 'MK1', 'TK2', '2020-11-16', 60, 60, 0, 'Trần Văn Chiến', '');
+('PNK0001', 'MK2', 'TK1', '2020-06-03', 50, 50, 900000, 'Thái Phùng Bảo Minh', ''),
+('PNK0002', 'MK1', 'TK2', '2020-07-13', 50, 50, 500000, 'Trần Mạnh Hùng', ''),
+('PNK0003', 'MK1', 'TK1', '2020-07-31', 55, 55, 712000, 'Nguyễn Mạnh Hùng', ''),
+('PNK0004', 'MK2', 'TK2', '2020-08-02', 30, 29, 290000, 'Trần Văn Chiến', ''),
+('PNK0005', 'MK2', 'TK1', '2020-09-09', 50, 50, 3750000, 'Nguyễn Văn Chiến', ''),
+('PNK0006', 'MK2', 'TK1', '2020-09-16', 10, 10, 1750000, 'Phùng Thái Bảo', ''),
+('PNK0007', 'MK2', 'TK1', '2020-09-22', 20, 20, 300000, 'Nguyễn Văn Chiến', ''),
+('PNK0008', 'MK1', 'TK1', '2020-11-01', 40, 40, 510000, 'Huỳnh Văn Bảy', ''),
+('PNK0009', 'MK2', 'TK2', '2020-11-02', 60, 58, 1450000, 'Huỳnh Văn BẢy', ''),
+('PNK0010', 'MK1', 'TK2', '2020-11-16', 60, 60, 350000, 'Trần Văn Chiến', '');
 
 -- --------------------------------------------------------
 
@@ -679,12 +699,12 @@ CREATE TABLE `phieuxuatkho` (
 --
 
 INSERT INTO `phieuxuatkho` (`mapxk`, `makho`, `manv`, `ngayxuatkho`, `tongslyeucau`, `tongslthucxuat`, `tongtien`, `manv_nhanhang`, `lydoxuatkho`) VALUES
-('PXK1', 'MK1', 'TK1', '2020-09-10', 20, 20, 0, 'BP3', 'Thực phẩm nấu ăn'),
-('PXK2', 'MK1', 'TK1', '2020-09-24', 10, 10, 0, 'BP4', 'Thực phẩm náu ăn'),
-('PXK3', 'MK1', 'TK2', '2020-09-29', 20, 20, 0, 'BP4', 'Thực phẩm náu ăn'),
-('PXK4', 'MK2', 'TK1', '2020-10-08', 5, 5, 0, 'TV1', 'Thiếu vật dụng'),
-('PXK5', 'MK2', 'TK2', '2020-10-20', 10, 10, 0, 'GX1', 'Thiếu dụng cụ'),
-('PXK6', 'MK1', 'TK1', '2020-10-30', 10, 10, 0, 'BP2', 'Thực phẩm nấu ăn');
+('PXK1', 'MK1', 'TK1', '2020-09-10', 20, 20, 200000, 'BP3', 'Thực phẩm nấu ăn'),
+('PXK2', 'MK1', 'TK1', '2020-09-24', 10, 10, 100000, 'BP4', 'Thực phẩm nấu ăn'),
+('PXK3', 'MK1', 'TK2', '2020-09-29', 20, 20, 240000, 'BP4', 'Thực phẩm nấu ăn'),
+('PXK4', 'MK2', 'TK1', '2020-10-08', 5, 5, 40000, 'TV1', 'Thiếu vật dụng'),
+('PXK5', 'MK2', 'TK2', '2020-10-20', 10, 10, 750000, 'GX1', 'Thiếu dụng cụ'),
+('PXK6', 'MK1', 'TK1', '2020-10-30', 10, 10, 500000, 'BP2', 'Thực phẩm nấu ăn');
 
 -- --------------------------------------------------------
 
